@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IllustratedScene } from './components/IllustratedScene';
 import { AddaJukebox } from './components/AddaJukebox';
+import { SponsorBadge } from './components/SponsorBadge';
 import { DirectoryDrawer } from './components/DirectoryDrawer';
 import { DetailModal } from './components/DetailModal';
 import { SubmitModal } from './components/SubmitModal';
@@ -144,6 +145,7 @@ export const App: React.FC = () => {
         {/* The Retro CH-01 Adda Jukebox Audio Player */}
         <div className="w-full">
           <AddaJukebox />
+          <SponsorBadge onOpenPartnerModal={() => setIsSubmitOpen(true)} />
         </div>
 
       </main>
