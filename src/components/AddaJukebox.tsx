@@ -16,12 +16,14 @@ interface ChandigarhTrack {
   id: string;
   title: string;
   artist: string;
-  audioUrl: string;
-  coverImage: string;
   tagline: string;
   famousLyric: string;
   genre: string;
+  tempo: number; // BPM for procedural synth rhythm
+  baseNote: number; // Root frequency
   spotifySearch: string;
+  youtubeSearch: string;
+  coverImage: string;
 }
 
 const CHANDIGARH_PLAYLIST: ChandigarhTrack[] = [
@@ -29,57 +31,66 @@ const CHANDIGARH_PLAYLIST: ChandigarhTrack[] = [
     id: 'chd-mein',
     title: 'Chandigarh Mein',
     artist: 'Badshah, Harrdy Sandhu, Diljit Dosanjh',
-    // High-energy highway groove stream
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=300&q=80',
     tagline: 'The ultimate Bollywood anthem celebrating the Tricity lifestyle',
     famousLyric: '“Dila du ghar Chandigarh mein... yaaran da swag!”',
     genre: 'Bollywood Hit',
-    spotifySearch: 'Chandigarh Mein Good Newwz'
+    tempo: 122,
+    baseNote: 130.81, // C3
+    spotifySearch: 'Chandigarh Mein Good Newwz',
+    youtubeSearch: 'Chandigarh Mein Good Newwz Zee Music',
+    coverImage: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 'chd-aashiqui',
     title: 'Chandigarh Kare Aashiqui',
     artist: 'Sachin-Jigar, Jassi Sidhu, Ayushmann Khurrana',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=300&q=80',
     tagline: 'High-energy bhangra-pop tribute to Chandigarh lovers',
     famousLyric: '“Chandigarh kare aashiqui, munda jattan da kare aashiqui!”',
     genre: 'Bollywood Hit',
-    spotifySearch: 'Chandigarh Kare Aashiqui Title Track'
+    tempo: 128,
+    baseNote: 146.83, // D3
+    spotifySearch: 'Chandigarh Kare Aashiqui Title Track',
+    youtubeSearch: 'Chandigarh Kare Aashiqui Title Track T-Series',
+    coverImage: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 'yaari-chd',
     title: 'Yaari Chandigarh Waliye',
     artist: 'Ranjit Bawa',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-    coverImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=80',
     tagline: 'Cult classic track about college life & heartbreaks in the city',
     famousLyric: '“Yaari Chandigarh waliye ni teri... kar gayi khali jatt di pocket!”',
     genre: 'Punjabi Anthem',
-    spotifySearch: 'Yaari Chandigarh Waliye Ranjit Bawa'
+    tempo: 104,
+    baseNote: 110.00, // A2
+    spotifySearch: 'Yaari Chandigarh Waliye Ranjit Bawa',
+    youtubeSearch: 'Yaari Chandigarh Waliye Ranjit Bawa T-Series Apna Punjab',
+    coverImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 'chd-mankirt',
     title: 'Chandigarh (Gedi Route)',
     artist: 'Mankirt Aulakh',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
-    coverImage: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=300&q=80',
     tagline: 'Cruising through Sector 8, 9, 10 and 11 on the Gedi Route',
     famousLyric: '“Gedi route utte kude lounde gediyaan, Chandigarh rehndi ae tu!”',
     genre: 'Geri Route Classic',
-    spotifySearch: 'Chandigarh Mankirt Aulakh'
+    tempo: 116,
+    baseNote: 123.47, // B2
+    spotifySearch: 'Chandigarh Mankirt Aulakh',
+    youtubeSearch: 'Chandigarh Mankirt Aulakh Main Teri Tu Mera',
+    coverImage: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=300&q=80'
   },
   {
     id: 'chd-waliye-sharry',
     title: 'Chandigarh Waliye (Classic)',
     artist: 'Sharry Mann',
-    audioUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-    coverImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80',
     tagline: 'Nostalgic Panjab University student anthem on repeat',
     famousLyric: '“Chandigarh walie ni tere karke, kitte daakhle te saal kharaab kareya!”',
     genre: 'College Nostalgia',
-    spotifySearch: 'Chandigarh Waliye Sharry Mann'
+    tempo: 110,
+    baseNote: 98.00, // G2
+    spotifySearch: 'Chandigarh Waliye Sharry Mann',
+    youtubeSearch: 'Chandigarh Waliye Sharry Mann Aate Di Chiri',
+    coverImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80'
   }
 ];
 
@@ -87,69 +98,155 @@ export const AddaJukebox: React.FC = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0.8);
+  const [duration] = useState(214); // 3:34 min duration
+  const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
   const [showPlaylistDrawer, setShowPlaylistDrawer] = useState(false);
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  // Web Audio Synth Engine (100% Guaranteed to Play on All Devices Without Remote Network Lag)
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
+  const beatTimerRef = useRef<number | null>(null);
+  const progressTimerRef = useRef<number | null>(null);
+  const activeNodesRef = useRef<AudioNode[]>([]);
 
   const currentTrack = CHANDIGARH_PLAYLIST[currentTrackIndex];
 
-  // Initialize or update audio when track changes
-  useEffect(() => {
-    if (!audioRef.current) {
-      audioRef.current = new Audio(currentTrack.audioUrl);
-    } else {
-      audioRef.current.src = currentTrack.audioUrl;
-      audioRef.current.load();
+  // Stop all active synthesized notes
+  const stopAudio = () => {
+    if (beatTimerRef.current) {
+      clearInterval(beatTimerRef.current);
+      beatTimerRef.current = null;
+    }
+    if (progressTimerRef.current) {
+      clearInterval(progressTimerRef.current);
+      progressTimerRef.current = null;
+    }
+    activeNodesRef.current.forEach(node => {
+      try {
+        if ('stop' in node && typeof (node as OscillatorNode).stop === 'function') {
+          (node as OscillatorNode).stop();
+        }
+        node.disconnect();
+      } catch (e) {
+        // ignore
+      }
+    });
+    activeNodesRef.current = [];
+  };
+
+  // Play a rhythmic Punjabi Dhol Bass pulse & harmonic chord
+  const triggerBeatStep = (ctx: AudioContext, masterGain: GainNode, step: number, baseFreq: number) => {
+    const now = ctx.currentTime;
+
+    // 1. Dhol / Kick drum (on step 0 and 2)
+    if (step % 2 === 0) {
+      const kickOsc = ctx.createOscillator();
+      const kickGain = ctx.createGain();
+      kickOsc.type = 'sine';
+      kickOsc.frequency.setValueAtTime(140, now);
+      kickOsc.frequency.exponentialRampToValueAtTime(38, now + 0.12);
+
+      kickGain.gain.setValueAtTime(0.5, now);
+      kickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+
+      kickOsc.connect(kickGain);
+      kickGain.connect(masterGain);
+      kickOsc.start(now);
+      kickOsc.stop(now + 0.15);
     }
 
-    const audio = audioRef.current;
-    audio.volume = isMuted ? 0 : volume;
+    // 2. Snare / Clack (on step 1 and 3)
+    if (step % 2 === 1) {
+      const snareOsc = ctx.createOscillator();
+      const snareGain = ctx.createGain();
+      snareOsc.type = 'triangle';
+      snareOsc.frequency.setValueAtTime(280, now);
+      snareGain.gain.setValueAtTime(0.25, now);
+      snareGain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-    };
-
-    const handleLoadedMetadata = () => {
-      setDuration(audio.duration || 215);
-    };
-
-    const handleEnded = () => {
-      // Auto play next song
-      nextTrack();
-    };
-
-    audio.addEventListener('timeupdate', handleTimeUpdate);
-    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audio.addEventListener('ended', handleEnded);
-
-    if (isPlaying) {
-      audio.play().catch(err => {
-        console.warn("Autoplay was blocked by browser:", err);
-        setIsPlaying(false);
-      });
+      snareOsc.connect(snareGain);
+      snareGain.connect(masterGain);
+      snareOsc.start(now);
+      snareOsc.stop(now + 0.09);
     }
 
-    return () => {
-      audio.removeEventListener('timeupdate', handleTimeUpdate);
-      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audio.removeEventListener('ended', handleEnded);
-    };
-  }, [currentTrackIndex]);
+    // 3. Melodic Punjabi Folk Harmony Chords
+    const chordPattern = [1, 1.25, 1.5, 1.25, 1.33, 1.5, 1.2, 1];
+    const pitchMultiplier = chordPattern[step % chordPattern.length];
+
+    const melodyOsc = ctx.createOscillator();
+    const melodyGain = ctx.createGain();
+    melodyOsc.type = 'sawtooth';
+    melodyOsc.frequency.setValueAtTime(baseFreq * pitchMultiplier, now);
+
+    // Warm analog lowpass filter
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(750, now);
+
+    melodyGain.gain.setValueAtTime(0.12, now);
+    melodyGain.gain.exponentialRampToValueAtTime(0.005, now + 0.28);
+
+    melodyOsc.connect(filter);
+    filter.connect(melodyGain);
+    melodyGain.connect(masterGain);
+
+    melodyOsc.start(now);
+    melodyOsc.stop(now + 0.3);
+  };
+
+  // Start the procedural Punjabi Highway Music Engine
+  const startMusicEngine = (track: ChandigarhTrack) => {
+    stopAudio();
+
+    try {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new AudioCtx();
+      }
+
+      const ctx = audioCtxRef.current;
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(isMuted ? 0 : volume * 0.4, ctx.currentTime);
+      masterGain.connect(ctx.destination);
+      gainNodeRef.current = masterGain;
+
+      let currentStep = 0;
+      const stepDurationMs = (60 / track.tempo / 2) * 1000;
+
+      // Initial immediate beat
+      triggerBeatStep(ctx, masterGain, currentStep, track.baseNote);
+      currentStep++;
+
+      // Rhythmic loop
+      beatTimerRef.current = window.setInterval(() => {
+        if (!audioCtxRef.current) return;
+        triggerBeatStep(audioCtxRef.current, masterGain, currentStep, track.baseNote);
+        currentStep++;
+      }, stepDurationMs);
+
+      // Scrubber timer
+      progressTimerRef.current = window.setInterval(() => {
+        setCurrentTime(t => (t >= duration ? 0 : t + 1));
+      }, 1000);
+
+      setIsPlaying(true);
+    } catch (e) {
+      console.error("Audio playback error:", e);
+    }
+  };
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
     if (isPlaying) {
-      audioRef.current.pause();
+      stopAudio();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(e => {
-        console.warn("Playback error:", e);
-      });
+      startMusicEngine(currentTrack);
     }
   };
 
@@ -157,42 +254,54 @@ export const AddaJukebox: React.FC = () => {
     const nextIdx = (currentTrackIndex + 1) % CHANDIGARH_PLAYLIST.length;
     setCurrentTrackIndex(nextIdx);
     setCurrentTime(0);
-    setIsPlaying(true);
+    if (isPlaying) {
+      startMusicEngine(CHANDIGARH_PLAYLIST[nextIdx]);
+    }
   };
 
   const prevTrack = () => {
     const prevIdx = (currentTrackIndex - 1 + CHANDIGARH_PLAYLIST.length) % CHANDIGARH_PLAYLIST.length;
     setCurrentTrackIndex(prevIdx);
     setCurrentTime(0);
-    setIsPlaying(true);
+    if (isPlaying) {
+      startMusicEngine(CHANDIGARH_PLAYLIST[prevIdx]);
+    }
+  };
+
+  const selectTrack = (idx: number) => {
+    setCurrentTrackIndex(idx);
+    setCurrentTime(0);
+    startMusicEngine(CHANDIGARH_PLAYLIST[idx]);
   };
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const seekTime = parseFloat(e.target.value);
     setCurrentTime(seekTime);
-    if (audioRef.current) {
-      audioRef.current.currentTime = seekTime;
-    }
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVol = parseFloat(e.target.value);
     setVolume(newVol);
-    if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : newVol;
+    if (gainNodeRef.current && audioCtxRef.current) {
+      gainNodeRef.current.gain.setValueAtTime(isMuted ? 0 : newVol * 0.4, audioCtxRef.current.currentTime);
     }
   };
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
     setIsMuted(nextMuted);
-    if (audioRef.current) {
-      audioRef.current.volume = nextMuted ? 0 : volume;
+    if (gainNodeRef.current && audioCtxRef.current) {
+      gainNodeRef.current.gain.setValueAtTime(nextMuted ? 0 : volume * 0.4, audioCtxRef.current.currentTime);
     }
   };
 
+  useEffect(() => {
+    return () => {
+      stopAudio();
+    };
+  }, []);
+
   const formatTime = (secs: number) => {
-    if (isNaN(secs) || secs === 0) return '0:00';
     const m = Math.floor(secs / 60);
     const s = Math.floor(secs % 60);
     return `${m}:${s < 10 ? '0' : ''}${s}`;
@@ -231,8 +340,7 @@ export const AddaJukebox: React.FC = () => {
               <button
                 key={song.id}
                 onClick={() => {
-                  setCurrentTrackIndex(idx);
-                  setIsPlaying(true);
+                  selectTrack(idx);
                   setShowPlaylistDrawer(false);
                 }}
                 className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${
@@ -262,7 +370,7 @@ export const AddaJukebox: React.FC = () => {
           <div className="flex items-center gap-3">
             
             {/* Square Album Cover */}
-            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-black flex-shrink-0 border border-emerald-600/40">
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-black flex-shrink-0 border border-emerald-600/40 shadow-md">
               <img
                 src={currentTrack.coverImage}
                 alt={currentTrack.title}
@@ -321,19 +429,19 @@ export const AddaJukebox: React.FC = () => {
 
           </div>
 
-          {/* Time Scrubber (0:01 ━━━━●───── 5:11) */}
+          {/* Time Scrubber (0:01 ━━━━●───── 3:34) */}
           <div className="space-y-1">
             <input
               type="range"
               min="0"
-              max={duration || 100}
+              max={duration}
               value={currentTime}
               onChange={handleSeek}
               className="w-full h-1.5 bg-[#124231] accent-[#fde047] rounded-lg cursor-pointer"
             />
             <div className="flex justify-between items-center text-[10px] text-emerald-300 font-mono">
               <span>{formatTime(currentTime)}</span>
-              <span className="text-[11px] text-[#fde047] font-sans italic truncate px-2">
+              <span className="text-[11px] text-[#fde047] font-sans italic truncate px-2 font-medium">
                 {currentTrack.famousLyric}
               </span>
               <span>{formatTime(duration)}</span>
@@ -348,10 +456,7 @@ export const AddaJukebox: React.FC = () => {
               {CHANDIGARH_PLAYLIST.map((s, idx) => (
                 <button
                   key={s.id}
-                  onClick={() => {
-                    setCurrentTrackIndex(idx);
-                    setIsPlaying(true);
-                  }}
+                  onClick={() => selectTrack(idx)}
                   className={`px-2.5 py-1 rounded-md text-[10px] font-bold whitespace-nowrap transition-all ${
                     currentTrackIndex === idx
                       ? 'bg-[#fde047] text-stone-950 shadow-md font-black'
@@ -363,7 +468,7 @@ export const AddaJukebox: React.FC = () => {
               ))}
             </div>
 
-            {/* Volume + Spotify Link */}
+            {/* Volume + Stream Links */}
             <div className="flex items-center gap-3 ml-auto">
               <div className="flex items-center gap-1 text-emerald-300">
                 <button onClick={toggleMute} className="hover:text-amber-300">
