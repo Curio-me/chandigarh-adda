@@ -21,6 +21,12 @@ const TRICITY_TELEMETRY = [
     color: 'text-sky-400',
   },
   {
+    tag: 'CITY AQI',
+    status: 'SECTOR 22 CAAQMS MONITOR',
+    info: 'AQI 118 (MODERATE) • SHIVALIK AIRFLOW',
+    color: 'text-amber-400',
+  },
+  {
     tag: 'NIGHT ADDA',
     status: 'SECTOR 35 & 26 PLAZA',
     info: 'DHABA CHAI • FOOD & NIGHTLIFE OPEN',

@@ -62,7 +62,7 @@ export const GediEntranceOverlay: React.FC<GediEntranceOverlayProps> = ({
           <span>CH-01 • GEDISTREAM 93.5 FM</span>
         </div>
         <div className="hidden sm:block text-amber-400/80">
-          SUKHNA LAKE SUNSET • 24°C
+          SUKHNA LAKE SUNSET • 24°C • AQI 118 (MODERATE)
         </div>
       </div>
 

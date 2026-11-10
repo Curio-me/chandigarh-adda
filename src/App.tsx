@@ -88,14 +88,25 @@ export const App: React.FC = () => {
       {/* 2. Top Header Bar (Clock, Social Links, Directory & Submit CTAs) */}
       <header className="relative z-30 w-full px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
         
-        {/* Left: Live Time & City Telemetry */}
+        {/* Left: Live Time, Weather & AQI Telemetry */}
         <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-200 shadow-md">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" />
           <span className="font-mono font-bold text-amber-300">{timeStr || '5:31 PM'}</span>
           <span className="text-stone-500">•</span>
-          <span className="text-stone-300 font-mono text-[11px]">24°C SUKHNA BREEZE</span>
+          <span className="text-stone-300 font-mono text-[11px] hidden sm:inline">24°C SUKHNA</span>
+          <span className="hidden sm:inline text-stone-500">•</span>
+          
+          {/* AQI Pill */}
+          <div className="flex items-center gap-1 font-mono text-[11px]">
+            <span className="text-stone-400 font-bold">AQI</span>
+            <span className="font-bold text-amber-300 bg-amber-400/15 px-1.5 py-0.5 rounded border border-amber-400/30">
+              118
+            </span>
+            <span className="text-amber-400/80 text-[10px] hidden md:inline font-medium">MODERATE</span>
+          </div>
+
           <span className="hidden lg:inline text-stone-500">•</span>
-          <span className="hidden lg:inline text-amber-400/90 font-mono text-[11px]">FM 93.5 MHZ</span>
+          <span className="hidden lg:inline text-amber-400/90 font-mono text-[11px]">93.5 FM</span>
         </div>
 
         {/* Center: Live Sector & Route Status Badge */}
