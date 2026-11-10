@@ -6,9 +6,6 @@ import {
   SkipBack, 
   Volume2, 
   VolumeX, 
-  ExternalLink, 
-  ListMusic,
-  Disc3,
   Repeat
 } from 'lucide-react';
 
@@ -116,7 +113,7 @@ export const AddaJukebox: React.FC = () => {
             }
 
             if (state === window.YT.PlayerState.ENDED) {
-              // Flip cassette to other side!
+              // Flip cassette to other side
               goToTrack((currentIdx + 1) % CHANDIGARH_CASSETTE_TRACKS.length);
             }
           }
@@ -199,57 +196,53 @@ export const AddaJukebox: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto select-none font-sans drop-shadow-2xl px-2 sm:px-0">
+    <div className="w-full max-w-[420px] mx-auto select-none font-sans drop-shadow-2xl px-2 sm:px-0">
       
       {/* ======================================================== */}
-      {/* VINTAGE 90s AUDIO CASSETTE TAPE SHELL */}
+      {/* COMPACT VINTAGE 90s AUDIO CASSETTE TAPE SHELL */}
       {/* ======================================================== */}
-      <div className="relative bg-[#201d1a] border-[5px] border-[#3a3530] rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.85)] ring-2 ring-black/80">
+      <div className="relative bg-[#201d1a] border-[4px] border-[#3a3530] rounded-2xl p-2.5 sm:p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.85)] ring-1 ring-black/80">
         
-        {/* Corner Cassette Screws (Authentic Hardware Details) */}
-        <div className="absolute top-2 left-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
-          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        {/* Corner Cassette Screws */}
+        <div className="absolute top-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute top-2 right-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
-          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        <div className="absolute top-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute bottom-2 left-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
-          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        <div className="absolute bottom-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute bottom-2 right-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
-          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        <div className="absolute bottom-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
 
         {/* Paper Label (Vintage Cassette Inlay) */}
-        <div className="bg-[#f6eee3] rounded-xl p-3 sm:p-4 text-[#1a1816] shadow-inner border border-[#d6c7b2]">
+        <div className="bg-[#f6eee3] rounded-lg p-2 sm:p-2.5 text-[#1a1816] shadow-inner border border-[#d6c7b2]">
           
           {/* Top Brand Banner Strip */}
-          <div className="flex items-center justify-between border-b-2 border-[#d94828] pb-1.5 mb-2.5">
-            <div className="flex items-center gap-2">
-              <span className="bg-[#d94828] text-white text-[10px] font-black px-1.5 py-0.5 rounded tracking-widest font-mono">
+          <div className="flex items-center justify-between border-b-2 border-[#d94828] pb-1 mb-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="bg-[#d94828] text-white text-[9px] font-black px-1.5 py-0.2 rounded tracking-widest font-mono">
                 {currentTrack.side}
               </span>
-              <span className="font-yatra text-sm sm:text-base text-[#1a1816] font-bold tracking-wider">
-                CH-01 STEREO CASSETTE
+              <span className="font-yatra text-xs sm:text-sm text-[#1a1816] font-bold tracking-wider">
+                CH-01 CASSETTE
               </span>
             </div>
 
-            <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-[#786b59]">
+            <div className="flex items-center gap-1 text-[9px] font-mono font-bold text-[#786b59]">
               <span>DOLBY B-NR</span>
-              <span className="hidden sm:inline">• 60 MIN</span>
             </div>
           </div>
 
           {/* Lined Notepaper Area with Handwritten Track Name */}
-          <div className="bg-white/80 border border-[#e2d5c3] rounded-lg p-2.5 mb-3 flex items-center justify-between shadow-xs">
+          <div className="bg-white/90 border border-[#e2d5c3] rounded-md px-2 py-1 mb-2 flex items-center justify-between shadow-2xs">
             <div className="truncate mr-2 text-left">
-              <span className="text-[10px] font-mono font-bold text-[#d94828] uppercase tracking-wider block">
-                NOW PLAYING • {currentTrack.tag}
-              </span>
-              <h3 className="font-bold text-sm sm:text-base text-[#111] truncate tracking-tight">
+              <h3 className="font-bold text-xs sm:text-sm text-[#111] truncate tracking-tight">
                 {currentTrack.title}
               </h3>
-              <p className="text-[11px] text-[#635746] truncate">
+              <p className="text-[10px] text-[#635746] truncate">
                 {currentTrack.artist}
               </p>
             </div>
@@ -257,32 +250,31 @@ export const AddaJukebox: React.FC = () => {
             {/* Flip Tape Button */}
             <button
               onClick={() => goToTrack(currentIdx === 0 ? 1 : 0)}
-              className="px-2.5 py-1 bg-[#1a1816] hover:bg-[#d94828] text-[#f6eee3] text-[10px] font-mono font-bold rounded-md transition-colors flex-shrink-0 flex items-center gap-1 shadow-sm"
+              className="px-2 py-0.5 bg-[#1a1816] hover:bg-[#d94828] text-[#f6eee3] text-[9px] font-mono font-bold rounded transition-colors flex-shrink-0 flex items-center gap-1 shadow-2xs"
               title="Flip to other side"
             >
-              <Repeat className="w-3 h-3" />
-              <span>Flip to {currentIdx === 0 ? 'Side B' : 'Side A'}</span>
+              <Repeat className="w-2.5 h-2.5" />
+              <span>Flip to {currentIdx === 0 ? 'B' : 'A'}</span>
             </button>
           </div>
 
           {/* ======================================================== */}
           {/* CASSETTE TRANSPARENT WINDOW WITH SPINNING REELS & TAPE */}
           {/* ======================================================== */}
-          <div className="relative bg-[#1a1816] border-2 border-[#473e35] rounded-xl p-3 sm:p-4 overflow-hidden shadow-inner flex items-center justify-around">
+          <div className="relative bg-[#1a1816] border border-[#473e35] rounded-lg py-1 px-3 overflow-hidden shadow-inner flex items-center justify-around">
             
             {/* Magnetic Tape Ribbon connecting the two wheels */}
-            <div className="absolute top-1/2 left-12 right-12 h-3 bg-[#331c14] -translate-y-1/2 z-0 border-y border-[#1f100a]" />
+            <div className="absolute top-1/2 left-8 right-8 h-2.5 bg-[#331c14] -translate-y-1/2 z-0 border-y border-[#1f100a]" />
 
             {/* Left Cogged Spool (Spins when playing) */}
             <div className="relative z-10 flex flex-col items-center">
               <div 
-                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4ebd9] border-4 border-[#331c14] flex items-center justify-center shadow-md transition-transform ${
-                  isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f4ebd9] border-[3px] border-[#331c14] flex items-center justify-center shadow-xs transition-transform ${
+                  isPlaying ? 'animate-[spin_2.8s_linear_infinite]' : ''
                 }`}
               >
-                {/* Center cog teeth */}
-                <div className="w-6 h-6 rounded-full bg-[#1a1816] border-2 border-[#7a6f62] flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-[#f4ebd9] rounded-sm" />
+                <div className="w-4 h-4 rounded-full bg-[#1a1816] border border-[#7a6f62] flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 bg-[#f4ebd9] rounded-xs" />
                 </div>
               </div>
             </div>
@@ -291,18 +283,16 @@ export const AddaJukebox: React.FC = () => {
             <div className="relative z-10 flex flex-col items-center text-center px-2">
               
               {/* Tape Level Meter Ruler Lines */}
-              <div className="flex gap-1 mb-1 opacity-70">
-                <div className="w-0.5 h-3 bg-[#f6eee3]" />
+              <div className="flex gap-1 mb-0.5 opacity-60">
                 <div className="w-0.5 h-2 bg-[#f6eee3]" />
+                <div className="w-0.5 h-1.5 bg-[#f6eee3]" />
+                <div className="w-0.5 h-2.5 bg-[#d94828]" />
+                <div className="w-0.5 h-1.5 bg-[#f6eee3]" />
                 <div className="w-0.5 h-2 bg-[#f6eee3]" />
-                <div className="w-0.5 h-4 bg-[#d94828]" />
-                <div className="w-0.5 h-2 bg-[#f6eee3]" />
-                <div className="w-0.5 h-2 bg-[#f6eee3]" />
-                <div className="w-0.5 h-3 bg-[#f6eee3]" />
               </div>
 
               {/* Time display */}
-              <div className="font-mono text-xs font-bold text-[#fde047] tracking-widest bg-black/60 px-2.5 py-0.5 rounded border border-[#524b45]">
+              <div className="font-mono text-[10px] font-bold text-[#fde047] tracking-wider bg-black/70 px-2 py-0.5 rounded border border-[#524b45]">
                 {formatTime(currentTime)} / {formatTime(duration)}
               </div>
 
@@ -315,13 +305,12 @@ export const AddaJukebox: React.FC = () => {
             {/* Right Cogged Spool (Spins when playing) */}
             <div className="relative z-10 flex flex-col items-center">
               <div 
-                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4ebd9] border-4 border-[#331c14] flex items-center justify-center shadow-md transition-transform ${
-                  isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#f4ebd9] border-[3px] border-[#331c14] flex items-center justify-center shadow-xs transition-transform ${
+                  isPlaying ? 'animate-[spin_2.8s_linear_infinite]' : ''
                 }`}
               >
-                {/* Center cog teeth */}
-                <div className="w-6 h-6 rounded-full bg-[#1a1816] border-2 border-[#7a6f62] flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 bg-[#f4ebd9] rounded-sm" />
+                <div className="w-4 h-4 rounded-full bg-[#1a1816] border border-[#7a6f62] flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 bg-[#f4ebd9] rounded-xs" />
                 </div>
               </div>
             </div>
@@ -329,16 +318,16 @@ export const AddaJukebox: React.FC = () => {
           </div>
 
           {/* Scrubber Ribbon Slider */}
-          <div className="mt-3">
+          <div className="mt-1.5">
             <input
               type="range"
               min="0"
               max={duration || 100}
               value={currentTime}
               onChange={handleSeek}
-              className="w-full h-1.5 bg-[#d6c7b2] accent-[#d94828] rounded-lg cursor-pointer"
+              className="w-full h-1 bg-[#d6c7b2] accent-[#d94828] rounded-lg cursor-pointer"
             />
-            <div className="flex justify-between items-center text-[11px] text-[#524534] font-medium italic pt-1">
+            <div className="flex justify-between items-center text-[10px] text-[#524534] font-medium italic pt-0.5">
               <span className="truncate">{currentTrack.famousLyric}</span>
             </div>
           </div>
@@ -346,20 +335,20 @@ export const AddaJukebox: React.FC = () => {
         </div>
 
         {/* ======================================================== */}
-        {/* RETRO MECHANICAL CASSETTE DECK BUTTONS */}
+        {/* COMPACT MECHANICAL CASSETTE DECK BUTTONS */}
         {/* ======================================================== */}
-        <div className="mt-3 pt-2 flex items-center justify-between gap-2 px-1 sm:px-2">
+        <div className="mt-2 flex items-center justify-between gap-2 px-1">
           
           {/* Side Selector Pills */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1">
             {CHANDIGARH_CASSETTE_TRACKS.map((t, idx) => (
               <button
                 key={t.id}
                 onClick={() => goToTrack(idx)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all shadow-sm ${
+                className={`px-2 py-1 rounded text-[10px] font-mono font-bold transition-all ${
                   currentIdx === idx
-                    ? 'bg-[#fde047] text-[#1a1816] border-2 border-black/60 shadow-md font-black scale-105'
-                    : 'bg-[#2b2723] text-[#d6c7b2] hover:bg-[#38332e] border border-black/40'
+                    ? 'bg-[#fde047] text-[#1a1816] font-black shadow-xs'
+                    : 'bg-[#2b2723] text-[#d6c7b2] hover:bg-[#38332e]'
                 }`}
               >
                 {t.side}
@@ -368,41 +357,41 @@ export const AddaJukebox: React.FC = () => {
           </div>
 
           {/* Mechanical Transport Controls (Rewind, Play, Forward) */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             
             {/* Rewind */}
             <button
               onClick={() => goToTrack(0)}
-              className="w-9 h-9 rounded-lg bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center border-t border-[#4f4841] border-b-2 border-black active:translate-y-0.5 shadow-md transition-all"
+              className="w-7 h-7 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all"
               title="Side A"
             >
-              <SkipBack className="w-4 h-4 fill-current" />
+              <SkipBack className="w-3.5 h-3.5 fill-current" />
             </button>
 
             {/* Play / Pause Tactile Button */}
             <button
               onClick={togglePlay}
-              className={`w-12 h-12 rounded-xl flex items-center justify-center font-black transition-all active:translate-y-1 shadow-lg ${
+              className={`w-9 h-9 rounded-lg flex items-center justify-center font-black transition-all active:translate-y-0.5 shadow-md ${
                 isPlaying
-                  ? 'bg-[#d94828] text-white border-t border-[#f06e51] border-b-4 border-[#85230d]'
-                  : 'bg-[#fde047] hover:bg-[#facc15] text-[#1a1816] border-t border-[#fff] border-b-4 border-[#ab8a0d]'
+                  ? 'bg-[#d94828] text-white'
+                  : 'bg-[#fde047] hover:bg-[#facc15] text-[#1a1816]'
               }`}
               title={isPlaying ? "Stop Tape" : "Play Tape"}
             >
               {isPlaying ? (
-                <Pause className="w-6 h-6 fill-current" />
+                <Pause className="w-4 h-4 fill-current" />
               ) : (
-                <Play className="w-6 h-6 fill-current ml-0.5" />
+                <Play className="w-4 h-4 fill-current ml-0.5" />
               )}
             </button>
 
             {/* Fast Forward */}
             <button
               onClick={() => goToTrack(1)}
-              className="w-9 h-9 rounded-lg bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center border-t border-[#4f4841] border-b-2 border-black active:translate-y-0.5 shadow-md transition-all"
+              className="w-7 h-7 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all"
               title="Side B"
             >
-              <SkipForward className="w-4 h-4 fill-current" />
+              <SkipForward className="w-3.5 h-3.5 fill-current" />
             </button>
 
           </div>
@@ -411,10 +400,10 @@ export const AddaJukebox: React.FC = () => {
           <div className="flex items-center gap-1 text-[#f6eee3]">
             <button 
               onClick={toggleMute}
-              className="p-1.5 rounded-lg bg-[#2b2723] hover:bg-[#38332e] border border-black/40 text-[#fde047] transition-colors"
+              className="p-1 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#fde047] transition-colors"
               title={isMuted ? "Unmute" : "Mute"}
             >
-              {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4" />}
+              {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400" /> : <Volume2 className="w-3.5 h-3.5" />}
             </button>
           </div>
 
@@ -423,11 +412,11 @@ export const AddaJukebox: React.FC = () => {
       </div>
 
       {/* Hanging Mudflaps below cassette deck */}
-      <div className="flex justify-between px-6 sm:px-12 -mt-1 pointer-events-none">
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[10px] sm:text-[11px] px-3 py-1 rounded-b-lg shadow-xl tracking-wider">
+      <div className="flex justify-between px-6 sm:px-10 -mt-0.5 pointer-events-none">
+        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
           ਬੁਰੀ ਨਜ਼ਰ / बुरी नज़र
         </div>
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[10px] sm:text-[11px] px-3 py-1 rounded-b-lg shadow-xl tracking-wider">
+        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
           ਵਾਲੇ ਤੇਰਾ ਮੂੰਹ ਕਾਲਾ 🌸
         </div>
       </div>
