@@ -19,6 +19,27 @@ export const IllustratedScene: React.FC<IllustratedSceneProps> = ({ onOpenPartne
       {/* 2. Soft Twilight Vignette Overlay for Text Readability & Golden Hour Ambiance */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 via-45% to-black/75 pointer-events-none" />
 
+      {/* 2b. Subtle Analog 90s Film Grain Texture (Inspired by Mazdoor Radio) */}
+      <div 
+        className="absolute inset-0 opacity-[0.045] pointer-events-none mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='1'/%3E%3C/svg%3E")`,
+          backgroundSize: '180px 180px'
+        }}
+      />
+
+      {/* 2c. Ultra-Subtle CRT Scanlines for Vintage Doordarshan / VHS Tape Vibe */}
+      <div 
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.45) 50%)',
+          backgroundSize: '100% 4px',
+        }}
+      />
+
+      {/* 2d. Cinematic Lens Radial Vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(0,0,0,0.6)_100%)] pointer-events-none" />
+
       {/* 3. Interactive Floating Landmark Badges & Sector 17 Wall Billboard */}
       <div className="absolute inset-0 pointer-events-auto z-10 hidden sm:block">
         
