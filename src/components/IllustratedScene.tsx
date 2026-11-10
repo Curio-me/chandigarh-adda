@@ -22,8 +22,8 @@ export const IllustratedScene: React.FC<IllustratedSceneProps> = ({ onOpenPartne
       {/* 3. Interactive Floating Landmark Badges & Sector 17 Wall Billboard */}
       <div className="absolute inset-0 pointer-events-auto z-10 hidden sm:block">
         
-        {/* Sector 17 Modernist Concrete Wall Billboard (Exact crop match) */}
-        <div className="absolute top-[18%] left-[3%] md:left-[4%] lg:left-[5%] hidden md:block">
+        {/* Sector 17 Concrete Wall Billboard (Positioned 100% within the wall boundaries) */}
+        <div className="absolute top-[27.5%] left-[1.2%] sm:left-[1.6%] md:left-[2.2%] lg:left-[2.6%] hidden md:block">
           <Sector17WallBillboard onOpenPartnerModal={onOpenPartnerModal} />
         </div>
 

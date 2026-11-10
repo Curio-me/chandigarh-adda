@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface Sector17WallBillboardProps {
   onOpenPartnerModal?: () => void;
@@ -9,77 +9,61 @@ export const Sector17WallBillboard: React.FC<Sector17WallBillboardProps> = ({ on
   return (
     <div 
       onClick={onOpenPartnerModal}
-      className="group relative cursor-pointer select-none transition-all duration-300"
+      className="group relative cursor-pointer select-none transition-all duration-300 w-[122px] sm:w-[132px]"
       title="Click to reserve this Sector 17 Plaza Billboard"
       style={{
-        transform: 'perspective(900px) rotateY(6deg) rotateX(1deg) skewY(-1.5deg)',
-        transformOrigin: 'top left',
+        transform: 'perspective(600px) rotateY(4deg) skewY(-0.8deg)',
+        transformOrigin: 'center center',
       }}
     >
-      {/* 1. Vintage Overhead Gooseneck Lamps */}
-      <div className="absolute -top-4 left-0 right-0 flex justify-around px-3 pointer-events-none z-20">
-        {/* Lamp 1 */}
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-3 bg-stone-700 rounded-t" />
-          <div className="w-4 h-1.5 bg-stone-800 rounded-full border border-stone-600 shadow-sm" />
-          <div className="w-8 h-8 -mt-1 bg-amber-400/10 group-hover:bg-amber-400/25 blur-md rounded-full transition-all duration-300" />
-        </div>
-        {/* Lamp 2 */}
-        <div className="flex flex-col items-center">
-          <div className="w-1 h-3 bg-stone-700 rounded-t" />
-          <div className="w-4 h-1.5 bg-stone-800 rounded-full border border-stone-600 shadow-sm" />
-          <div className="w-8 h-8 -mt-1 bg-amber-400/10 group-hover:bg-amber-400/25 blur-md rounded-full transition-all duration-300" />
-        </div>
-      </div>
-
-      {/* 2. Outer Weathered Architectural Iron Frame */}
-      <div className="relative bg-stone-950/90 group-hover:bg-black border-2 border-stone-600/80 group-hover:border-amber-400/90 rounded-md p-2.5 sm:p-3 shadow-[0_8px_25px_rgba(0,0,0,0.85)] group-hover:shadow-[0_0_30px_rgba(251,191,36,0.35)] backdrop-blur-sm transition-all duration-300 w-[175px] sm:w-[205px]">
+      {/* Outer Weathered Architectural Iron Frame - Sized to fit 100% inside the concrete panel */}
+      <div className="relative bg-stone-950/92 group-hover:bg-black border border-stone-600/90 group-hover:border-amber-400 rounded p-1.5 sm:p-2 shadow-[0_4px_16px_rgba(0,0,0,0.85)] group-hover:shadow-[0_0_20px_rgba(251,191,36,0.3)] backdrop-blur-sm transition-all duration-200">
         
-        {/* Corner Rivet Screws */}
-        <span className="absolute top-1 left-1 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
-        <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
-        <span className="absolute bottom-1 left-1 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
-        <span className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
+        {/* Corner Rivet Screws (flush mounted on the wall) */}
+        <span className="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
+        <span className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
+        <span className="absolute bottom-0.5 left-0.5 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
+        <span className="absolute bottom-0.5 right-0.5 w-1 h-1 rounded-full bg-stone-400 shadow-[inset_0_1px_1px_rgba(0,0,0,0.8)]" />
 
         {/* Top Header Tag */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-1 mb-1.5 text-[8px] font-mono tracking-widest text-amber-300/90 uppercase">
-          <div className="flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-            <span>SEC-17 WALL #01</span>
+        <div className="flex items-center justify-between border-b border-white/10 pb-0.5 mb-1 text-[7px] font-mono tracking-wider text-amber-300/90 uppercase">
+          <div className="flex items-center gap-0.5">
+            <span className="w-1 h-1 rounded-full bg-orange-500 animate-pulse" />
+            <span>SEC-17 WALL</span>
           </div>
-          <span className="bg-amber-500/20 text-amber-300 px-1 py-0.5 rounded font-bold">
-            AVAILABLE
+          <span className="bg-amber-500/20 text-amber-300 px-0.5 py-0.2 rounded font-bold text-[6px]">
+            AD SLOT
           </span>
         </div>
 
         {/* Main Billboard Headline */}
-        <div className="py-1 text-center space-y-0.5">
-          <div className="font-black text-xs sm:text-sm tracking-tight text-white group-hover:text-amber-200 transition-colors uppercase leading-tight font-sans drop-shadow-sm">
+        <div className="py-0.5 text-center space-y-0.5">
+          <div className="font-black text-[9px] sm:text-[10px] tracking-tight text-white group-hover:text-amber-200 uppercase leading-none font-sans drop-shadow-sm">
             Spotlight Your
           </div>
-          <div className="font-extrabold text-sm sm:text-base tracking-wider text-amber-400 group-hover:text-amber-300 uppercase leading-none font-yatra drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+          <div className="font-extrabold text-[11px] sm:text-[12px] tracking-wide text-amber-400 group-hover:text-amber-300 uppercase leading-tight font-yatra drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
             Brand Here
           </div>
-          <div className="text-[9px] text-stone-300/80 font-medium pt-0.5">
-            Chandigarh Plaza Hoarding
+          <div className="text-[7.5px] text-stone-300/80 font-medium">
+            Sector 17 Hoarding
           </div>
         </div>
 
         {/* Bottom Call to Action */}
-        <div className="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between">
-          <span className="text-[9px] font-mono text-stone-400">
-            50K+ Monthly Reach
+        <div className="mt-1 pt-1 border-t border-white/10 flex items-center justify-between">
+          <span className="text-[7px] font-mono text-stone-400">
+            50K+ Views
           </span>
-          <div className="flex items-center gap-0.5 bg-amber-400 group-hover:bg-amber-300 text-stone-950 px-2 py-0.5 rounded text-[9px] font-black tracking-wide shadow transition-all group-hover:scale-105">
-            <span>Book Wall</span>
-            <ArrowUpRight className="w-2.5 h-2.5 stroke-[3]" />
+          <div className="flex items-center gap-0.5 bg-amber-400 group-hover:bg-amber-300 text-stone-950 px-1.5 py-0.5 rounded text-[7.5px] font-black tracking-wide shadow transition-all group-hover:scale-105">
+            <span>Book</span>
+            <ArrowUpRight className="w-2 h-2 stroke-[3]" />
           </div>
         </div>
 
       </div>
 
-      {/* Subtle Shadow Cast on Concrete Wall */}
-      <div className="absolute -bottom-2 left-2 right-2 h-2 bg-black/60 blur-sm rounded pointer-events-none" />
+      {/* Subtle Shadow Cast directly on Concrete Wall */}
+      <div className="absolute -bottom-1 left-1 right-1 h-1 bg-black/50 blur-[2px] rounded pointer-events-none" />
 
     </div>
   );
