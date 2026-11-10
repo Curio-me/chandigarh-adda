@@ -186,78 +186,22 @@ export const App: React.FC = () => {
 
       </main>
 
-      {/* 4. Bottom Dock: The 7 Tricity Pillars Toolbar */}
-      <footer className="relative z-30 pb-4 sm:pb-6 px-4">
-        
-        <div className="max-w-3xl mx-auto bg-black/60 backdrop-blur-xl border border-white/15 p-2 rounded-2xl sm:rounded-full shadow-2xl flex flex-wrap items-center justify-around gap-1">
-          
-          <button
-            onClick={() => openPillar('events')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Ticket className="w-3.5 h-3.5 text-purple-400" />
-            <span>Events & Gigs</span>
-          </button>
-
-          <button
-            onClick={() => openPillar('food')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <UtensilsCrossed className="w-3.5 h-3.5 text-orange-400" />
-            <span>Food & Cafes</span>
-          </button>
-
-          <button
-            onClick={() => openPillar('guides')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Landmark className="w-3.5 h-3.5 text-emerald-400" />
-            <span>City Guides</span>
-          </button>
-
-          <button
-            onClick={() => openPillar('escapes')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Mountain className="w-3.5 h-3.5 text-sky-400" />
-            <span>Hill Escapes</span>
-          </button>
-
-          <button
-            onClick={() => openPillar('startups')}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Briefcase className="w-3.5 h-3.5 text-amber-400" />
-            <span>Startups</span>
-          </button>
-
-          <button
-            onClick={() => openPillar('news')}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-stone-200 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Newspaper className="w-3.5 h-3.5 text-stone-300" />
-            <span>City News</span>
-          </button>
-
-          <button
-            onClick={() => setIsSubmitOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-orange-600 hover:bg-orange-500 text-white shadow-sm transition-all"
-          >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Feature Spot</span>
-          </button>
-
-        </div>
-
-        {/* Minimal Footer Line */}
-        <div className="text-center text-[10px] sm:text-xs text-stone-400/80 drop-shadow mt-3 flex items-center justify-center gap-4">
-          <span>chandigarhadda.com • The City Beautiful</span>
+      {/* 4. Minimal Footer (Clean & unobtrusive like truckplaylist.wtf) */}
+      <footer className="relative z-30 pb-3 sm:pb-4 px-4 text-center">
+        <div className="text-[11px] sm:text-xs text-stone-300/80 drop-shadow flex items-center justify-center gap-4">
+          <span className="font-mono">chandigarhadda.com</span>
           <span>•</span>
-          <a href="https://instagram.com/chandigarhadda" target="_blank" rel="noreferrer" className="hover:text-amber-300 transition-colors">
+          <span>The City Beautiful</span>
+          <span>•</span>
+          <a 
+            href="https://instagram.com/chandigarhadda" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="hover:text-[#ffd166] transition-colors"
+          >
             @chandigarhadda
           </a>
         </div>
-
       </footer>
 
       {/* Directory Slider Drawer for all 7 Pillars */}
