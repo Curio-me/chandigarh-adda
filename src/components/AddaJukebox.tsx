@@ -8,8 +8,7 @@ import {
   VolumeX, 
   ExternalLink, 
   ListMusic,
-  Disc3,
-  Sparkles
+  Disc3
 } from 'lucide-react';
 
 declare global {
@@ -20,13 +19,14 @@ declare global {
 }
 
 interface SongItem {
-  id: string; // YouTube video ID (exact match)
+  id: string; // YouTube video ID
   title: string;
   artist: string;
   famousLyric: string;
   tag: string;
 }
 
+// ONLY songs that specifically feature Chandigarh!
 const CHANDIGARH_SONGS: SongItem[] = [
   {
     id: 'A3W_o55w6gU',
@@ -50,32 +50,25 @@ const CHANDIGARH_SONGS: SongItem[] = [
     tag: 'Punjabi Anthem'
   },
   {
-    id: 'IJNR_UVLDhs',
-    title: 'Main Nikla Gaddi Leke',
-    artist: 'Udit Narayan (Gadar Truck Anthem)',
-    famousLyric: '“Main nikla o gaddi leke... raste par ek mod aaya!”',
-    tag: 'Highway Classic'
+    id: 'PjHsB7ed1uM',
+    title: 'Chandigarh Rehn Waaliye',
+    artist: 'Jenny Johal ft. Raftaar',
+    famousLyric: '“Chandigarh rehn waliye, dil lutt ke le gayi!”',
+    tag: 'Geri Route Rap'
   },
   {
-    id: '5MIGQBpVeqs',
-    title: 'Mujhse Mohabbat Ka',
-    artist: 'Kumar Sanu (Dhaba Classic)',
-    famousLyric: '“Mujhse mohabbat ka izhaar karti... kaash koi ladki mujhe pyar karti”',
-    tag: '90s Highway Hit'
+    id: 'FZTVr3MAgPf3',
+    title: 'Chandigarh (Gedi Route)',
+    artist: 'Mankirt Aulakh',
+    famousLyric: '“Gedi route utte kude lounde gediyaan, Chandigarh rehndi ae tu!”',
+    tag: 'Geri Route Classic'
   },
   {
-    id: 'd7MDzmchS50',
-    title: 'Yeh Dil Deewana',
-    artist: 'Sonu Nigam (Pardes Highway Cruising)',
-    famousLyric: '“Yeh dil deewana, deewana hai yeh dil!”',
-    tag: 'Night Drive'
-  },
-  {
-    id: 'xKb6lP3JxrA',
-    title: 'Pardesi Pardesi',
-    artist: 'Udit Narayan & Alka Yagnik',
-    famousLyric: '“Pardesi pardesi jaana nahi, mujhe chhod ke!”',
-    tag: 'All-Time Classic'
+    id: 'QLUDWeBTixE',
+    title: 'Chandigarh Waliye (Classic)',
+    artist: 'Sharry Mann',
+    famousLyric: '“Chandigarh walie ni tere karke, kitte daakhle te saal kharaab kareya!”',
+    tag: 'PU Campus Anthem'
   }
 ];
 
@@ -132,10 +125,10 @@ export const AddaJukebox: React.FC = () => {
           },
           onError: (e: any) => {
             console.warn('Track blocked or unavailable, skipping to next:', e);
-            setStatusText('Skipping blocked track…');
+            setStatusText('Skipping to next track…');
             setTimeout(() => {
               goToTrack((currentIdx + 1) % CHANDIGARH_SONGS.length);
-            }, 1000);
+            }, 800);
           },
           onStateChange: (e: any) => {
             const state = e.data;
@@ -237,7 +230,7 @@ export const AddaJukebox: React.FC = () => {
   return (
     <div className="w-full max-w-xl mx-auto select-none font-sans drop-shadow-2xl px-2 sm:px-0">
       
-      {/* Outer Retro Number Plate Container (100% Identical to truckplaylist.wtf) */}
+      {/* Outer Retro Number Plate Container */}
       <div className="bg-[#1e7a46] border-[6px] border-[#f2790f] rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-[0_18px_40px_rgba(0,0,0,0.6)] relative">
         
         {/* Blinking indicator lights */}
@@ -257,7 +250,7 @@ export const AddaJukebox: React.FC = () => {
             className="flex items-center gap-1 text-[10px] font-bold bg-[#14213d] hover:bg-[#1a2d54] text-[#ffc300] border border-[#f2790f]/60 px-2.5 py-1 rounded-full transition-colors flex-shrink-0"
           >
             <ListMusic className="w-3.5 h-3.5" />
-            <span>{showPlaylist ? 'Hide' : `Tracklist (${CHANDIGARH_SONGS.length})`}</span>
+            <span>{showPlaylist ? 'Hide' : `Chandigarh Songs (${CHANDIGARH_SONGS.length})`}</span>
           </button>
         </div>
 
@@ -265,7 +258,7 @@ export const AddaJukebox: React.FC = () => {
         {showPlaylist && (
           <div className="mb-3 bg-[#0d1627] border border-[#f2790f]/50 rounded-xl p-2 max-h-52 overflow-y-auto space-y-1 text-left animate-fade-in shadow-xl">
             <span className="text-[10px] font-bold text-[#ffc300] uppercase tracking-wider px-2 block mb-1">
-              Select A Bollywood / Chandigarh Hit:
+              Select A Chandigarh Song:
             </span>
             {CHANDIGARH_SONGS.map((song, idx) => (
               <button
@@ -297,10 +290,10 @@ export const AddaJukebox: React.FC = () => {
         {/* Inner Console */}
         <div className="bg-[#14213d] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-[#f2790f]/30 flex flex-col gap-2.5 shadow-inner">
           
-          {/* Main Track Row: Tiny 64x64 Screen + Meta + Play Controls (Pure truckplaylist.wtf layout) */}
+          {/* Main Track Row: Tiny 64x64 Screen + Meta + Play Controls (Pure truckplaylist layout) */}
           <div className="flex items-center gap-3">
             
-            {/* 64x64 YouTube Screen Box (Acting as moving Album Art just like truckplaylist.wtf) */}
+            {/* 64x64 YouTube Screen Box (Acting as moving Album Art) */}
             <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-black flex-shrink-0 border-2 border-[#f2790f] shadow-[0_0_0_2px_#fff3dc,0_3px_8px_rgba(0,0,0,0.5)]">
               <div id="yt-player-embed" className="w-full h-full object-cover" />
               {!isPlayerReady && (
@@ -332,7 +325,7 @@ export const AddaJukebox: React.FC = () => {
                 <SkipBack className="w-4 h-4 fill-current" />
               </button>
 
-              {/* Big Yellow Play/Pause (54px on truckplaylist.wtf) */}
+              {/* Big Yellow Play/Pause Button */}
               <button
                 onClick={togglePlay}
                 className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ffc300] hover:bg-[#ffb700] text-stone-950 flex items-center justify-center font-black shadow-[0_4px_0_rgba(0,0,0,0.5)] active:translate-y-0.5 transition-all"
@@ -358,7 +351,7 @@ export const AddaJukebox: React.FC = () => {
 
           </div>
 
-          {/* Time Scrubber (0:00 ━━━━●───── 4:12) */}
+          {/* Time Scrubber */}
           <div className="space-y-1">
             <input
               type="range"
@@ -370,7 +363,7 @@ export const AddaJukebox: React.FC = () => {
             />
             <div className="flex justify-between items-center text-[10px] text-stone-400 font-mono">
               <span>{formatTime(currentTime)}</span>
-              <span className="text-[11px] text-[#ffc300] font-sans italic truncate px-2">
+              <span className="text-[11px] text-[#ffc300] font-sans italic truncate px-2 font-medium">
                 {currentSong.famousLyric}
               </span>
               <span>{formatTime(duration)}</span>
@@ -412,7 +405,7 @@ export const AddaJukebox: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[10px] font-bold text-[#ffc300] hover:text-white flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded border border-[#f2790f]/40"
-                title="YT Music"
+                title="Listen on YT Music"
               >
                 <span>YT Music</span>
                 <ExternalLink className="w-2.5 h-2.5" />
@@ -425,13 +418,13 @@ export const AddaJukebox: React.FC = () => {
 
       </div>
 
-      {/* Hanging Mudflaps (Exact font and style of truckplaylist.wtf) */}
+      {/* Hanging Mudflaps (Exact font and style of truckplaylist) */}
       <div className="flex justify-between px-6 sm:px-12 -mt-1 pointer-events-none">
         <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[11px] sm:text-xs px-3 py-1.5 rounded-b-lg shadow-xl tracking-wider">
-          बुरी नज़र
+          ਬੁਰੀ ਨਜ਼ਰ / बुरी नज़र
         </div>
         <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[11px] sm:text-xs px-3 py-1.5 rounded-b-lg shadow-xl tracking-wider text-center">
-          वाले तेरा मुँह काला 🌸
+          ਵਾਲੇ ਤੇਰਾ ਮੂੰਹ ਕਾਲਾ 🌸
         </div>
       </div>
 
