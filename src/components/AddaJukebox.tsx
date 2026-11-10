@@ -199,26 +199,26 @@ export const AddaJukebox: React.FC = () => {
     <div className="w-full max-w-[420px] mx-auto select-none font-sans drop-shadow-2xl px-2 sm:px-0">
       
       {/* ======================================================== */}
-      {/* COMPACT VINTAGE 90s AUDIO CASSETTE TAPE SHELL */}
+      {/* COMPACT VINTAGE 90s SMOKY TRANSLUCENT CASSETTE TAPE SHELL */}
       {/* ======================================================== */}
-      <div className="relative bg-[#201d1a] border-[4px] border-[#3a3530] rounded-2xl p-2.5 sm:p-3.5 shadow-[0_16px_36px_rgba(0,0,0,0.85)] ring-1 ring-black/80">
+      <div className="relative bg-[#1e1b17]/80 backdrop-blur-md border-[3px] border-[#4a423a]/75 rounded-2xl p-2.5 sm:p-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.7)] ring-1 ring-white/10">
         
         {/* Corner Cassette Screws */}
-        <div className="absolute top-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+        <div className="absolute top-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45]/90 border border-black/80 flex items-center justify-center">
           <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute top-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+        <div className="absolute top-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45]/90 border border-black/80 flex items-center justify-center">
           <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute bottom-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+        <div className="absolute bottom-1.5 left-2 w-2 h-2 rounded-full bg-[#524b45]/90 border border-black/80 flex items-center justify-center">
           <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
-        <div className="absolute bottom-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+        <div className="absolute bottom-1.5 right-2 w-2 h-2 rounded-full bg-[#524b45]/90 border border-black/80 flex items-center justify-center">
           <div className="w-1 h-0.5 bg-[#2b2723]" />
         </div>
 
-        {/* Paper Label (Vintage Cassette Inlay) */}
-        <div className="bg-[#f6eee3] rounded-lg p-2 sm:p-2.5 text-[#1a1816] shadow-inner border border-[#d6c7b2]">
+        {/* Paper Label (Vintage Cassette Inlay - Soft Translucent) */}
+        <div className="bg-[#f6eee3]/85 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 text-[#1a1816] shadow-inner border border-[#d6c7b2]/80">
           
           {/* Top Brand Banner Strip */}
           <div className="flex items-center justify-between border-b-2 border-[#d94828] pb-1 mb-1.5">
@@ -237,7 +237,7 @@ export const AddaJukebox: React.FC = () => {
           </div>
 
           {/* Lined Notepaper Area with Handwritten Track Name */}
-          <div className="bg-white/90 border border-[#e2d5c3] rounded-md px-2 py-1 mb-2 flex items-center justify-between shadow-2xs">
+          <div className="bg-white/80 backdrop-blur-xs border border-[#e2d5c3]/90 rounded-md px-2 py-1 mb-2 flex items-center justify-between shadow-2xs">
             <div className="truncate mr-2 text-left">
               <h3 className="font-bold text-xs sm:text-sm text-[#111] truncate tracking-tight">
                 {currentTrack.title}
@@ -250,7 +250,7 @@ export const AddaJukebox: React.FC = () => {
             {/* Flip Tape Button */}
             <button
               onClick={() => goToTrack(currentIdx === 0 ? 1 : 0)}
-              className="px-2 py-0.5 bg-[#1a1816] hover:bg-[#d94828] text-[#f6eee3] text-[9px] font-mono font-bold rounded transition-colors flex-shrink-0 flex items-center gap-1 shadow-2xs"
+              className="px-2 py-0.5 bg-[#1a1816]/90 hover:bg-[#d94828] text-[#f6eee3] text-[9px] font-mono font-bold rounded transition-colors flex-shrink-0 flex items-center gap-1 shadow-2xs"
               title="Flip to other side"
             >
               <Repeat className="w-2.5 h-2.5" />
@@ -259,9 +259,9 @@ export const AddaJukebox: React.FC = () => {
           </div>
 
           {/* ======================================================== */}
-          {/* CASSETTE TRANSPARENT WINDOW WITH SPINNING REELS & TAPE */}
+          {/* CASSETTE TRANSPARENT SMOKY WINDOW WITH SPINNING REELS */}
           {/* ======================================================== */}
-          <div className="relative bg-[#1a1816] border border-[#473e35] rounded-lg py-1 px-3 overflow-hidden shadow-inner flex items-center justify-around">
+          <div className="relative bg-black/65 backdrop-blur-md border border-[#5a4f44]/60 rounded-lg py-1 px-3 overflow-hidden shadow-inner flex items-center justify-around">
             
             {/* Magnetic Tape Ribbon connecting the two wheels */}
             <div className="absolute top-1/2 left-8 right-8 h-2.5 bg-[#331c14] -translate-y-1/2 z-0 border-y border-[#1f100a]" />
@@ -348,7 +348,7 @@ export const AddaJukebox: React.FC = () => {
                 className={`px-2 py-1 rounded text-[10px] font-mono font-bold transition-all ${
                   currentIdx === idx
                     ? 'bg-[#fde047] text-[#1a1816] font-black shadow-xs'
-                    : 'bg-[#2b2723] text-[#d6c7b2] hover:bg-[#38332e]'
+                    : 'bg-[#2b2723]/80 hover:bg-[#38332e] text-[#d6c7b2] backdrop-blur-xs'
                 }`}
               >
                 {t.side}
@@ -362,7 +362,7 @@ export const AddaJukebox: React.FC = () => {
             {/* Rewind */}
             <button
               onClick={() => goToTrack(0)}
-              className="w-7 h-7 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all"
+              className="w-7 h-7 rounded bg-[#2b2723]/80 hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all backdrop-blur-xs"
               title="Side A"
             >
               <SkipBack className="w-3.5 h-3.5 fill-current" />
@@ -388,7 +388,7 @@ export const AddaJukebox: React.FC = () => {
             {/* Fast Forward */}
             <button
               onClick={() => goToTrack(1)}
-              className="w-7 h-7 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all"
+              className="w-7 h-7 rounded bg-[#2b2723]/80 hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center active:translate-y-0.5 shadow-xs transition-all backdrop-blur-xs"
               title="Side B"
             >
               <SkipForward className="w-3.5 h-3.5 fill-current" />
@@ -400,7 +400,7 @@ export const AddaJukebox: React.FC = () => {
           <div className="flex items-center gap-1 text-[#f6eee3]">
             <button 
               onClick={toggleMute}
-              className="p-1 rounded bg-[#2b2723] hover:bg-[#38332e] text-[#fde047] transition-colors"
+              className="p-1 rounded bg-[#2b2723]/80 hover:bg-[#38332e] text-[#fde047] transition-colors backdrop-blur-xs"
               title={isMuted ? "Unmute" : "Mute"}
             >
               {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -413,10 +413,10 @@ export const AddaJukebox: React.FC = () => {
 
       {/* Hanging Mudflaps below cassette deck */}
       <div className="flex justify-between px-6 sm:px-10 -mt-0.5 pointer-events-none">
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
+        <div className="bg-[#111]/80 backdrop-blur-xs border border-stone-800/80 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
           ਬੁਰੀ ਨਜ਼ਰ / बुरी नज़र
         </div>
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
+        <div className="bg-[#111]/80 backdrop-blur-xs border border-stone-800/80 text-[#fff3dc] font-yatra text-[9px] sm:text-[10px] px-2.5 py-0.5 rounded-b-md shadow-lg tracking-wider">
           ਵਾਲੇ ਤੇਰਾ ਮੂੰਹ ਕਾਲਾ 🌸
         </div>
       </div>
