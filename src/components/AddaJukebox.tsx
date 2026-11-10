@@ -8,7 +8,8 @@ import {
   VolumeX, 
   ExternalLink, 
   ListMusic,
-  Disc3
+  Disc3,
+  Repeat
 } from 'lucide-react';
 
 declare global {
@@ -18,27 +19,29 @@ declare global {
   }
 }
 
-interface SongItem {
+interface CassetteTrack {
   id: string; // YouTube video ID
   title: string;
   artist: string;
+  side: 'SIDE A' | 'SIDE B';
   famousLyric: string;
   tag: string;
 }
 
-// Verified 100% playable Chandigarh anthems
-const CHANDIGARH_SONGS: SongItem[] = [
+const CHANDIGARH_CASSETTE_TRACKS: CassetteTrack[] = [
   {
     id: 'QLUDWeBTixE',
     title: 'Yaari Chandigarh Waliye',
     artist: 'Ranjit Bawa',
+    side: 'SIDE A',
     famousLyric: '“Yaari Chandigarh waliye ni teri... kar gayi khali jatt di pocket!”',
-    tag: 'Punjabi Anthem'
+    tag: 'Tricity Classic'
   },
   {
     id: 'PjHsB7ed1uM',
     title: 'Chandigarh Rehn Waaliye',
     artist: 'Jenny Johal ft. Raftaar',
+    side: 'SIDE B',
     famousLyric: '“Chandigarh rehn waliye, dil lutt ke le gayi!”',
     tag: 'Geri Route Rap'
   }
@@ -50,16 +53,15 @@ export const AddaJukebox: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
-  const [showPlaylist, setShowPlaylist] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [statusText, setStatusText] = useState('Press play, driver saab');
+  const [statusText, setStatusText] = useState('Yaari Chandigarh Waliye');
 
   const playerRef = useRef<any>(null);
   const timerRef = useRef<number | null>(null);
 
-  const currentSong = CHANDIGARH_SONGS[currentIdx];
+  const currentTrack = CHANDIGARH_CASSETTE_TRACKS[currentIdx];
 
-  // Load YouTube Iframe API script once
+  // Load YouTube Iframe API
   useEffect(() => {
     if (!window.YT) {
       const tag = document.createElement('script');
@@ -81,8 +83,8 @@ export const AddaJukebox: React.FC = () => {
 
   const initPlayer = () => {
     try {
-      playerRef.current = new window.YT.Player('yt-player-embed', {
-        videoId: CHANDIGARH_SONGS[0].id,
+      playerRef.current = new window.YT.Player('yt-cassette-audio', {
+        videoId: CHANDIGARH_CASSETTE_TRACKS[0].id,
         playerVars: {
           controls: 0,
           disablekb: 1,
@@ -93,14 +95,11 @@ export const AddaJukebox: React.FC = () => {
         events: {
           onReady: () => {
             setIsPlayerReady(true);
-            setStatusText(CHANDIGARH_SONGS[0].title);
+            setStatusText(CHANDIGARH_CASSETTE_TRACKS[0].title);
           },
           onError: (e: any) => {
-            console.warn('Track blocked or unavailable, skipping to next:', e);
-            setStatusText('Skipping to next track…');
-            setTimeout(() => {
-              goToTrack((currentIdx + 1) % CHANDIGARH_SONGS.length);
-            }, 800);
+            console.warn('Track error, switching side:', e);
+            goToTrack((currentIdx + 1) % CHANDIGARH_CASSETTE_TRACKS.length);
           },
           onStateChange: (e: any) => {
             const state = e.data;
@@ -110,15 +109,15 @@ export const AddaJukebox: React.FC = () => {
             if (playing) {
               startProgressTimer();
               if (playerRef.current) {
-                setDuration(playerRef.current.getDuration() || 215);
+                setDuration(playerRef.current.getDuration() || 240);
               }
             } else {
               if (timerRef.current) clearInterval(timerRef.current);
             }
 
-            // Auto-advance to next song when finished
             if (state === window.YT.PlayerState.ENDED) {
-              goToTrack((currentIdx + 1) % CHANDIGARH_SONGS.length);
+              // Flip cassette to other side!
+              goToTrack((currentIdx + 1) % CHANDIGARH_CASSETTE_TRACKS.length);
             }
           }
         }
@@ -141,11 +140,11 @@ export const AddaJukebox: React.FC = () => {
   };
 
   const goToTrack = (idx: number) => {
-    const nextIndex = ((idx % CHANDIGARH_SONGS.length) + CHANDIGARH_SONGS.length) % CHANDIGARH_SONGS.length;
+    const nextIndex = ((idx % CHANDIGARH_CASSETTE_TRACKS.length) + CHANDIGARH_CASSETTE_TRACKS.length) % CHANDIGARH_CASSETTE_TRACKS.length;
     setCurrentIdx(nextIndex);
     setCurrentTime(0);
 
-    const song = CHANDIGARH_SONGS[nextIndex];
+    const song = CHANDIGARH_CASSETTE_TRACKS[nextIndex];
     setStatusText(song.title);
 
     if (playerRef.current && isPlayerReady) {
@@ -167,7 +166,7 @@ export const AddaJukebox: React.FC = () => {
         setIsPlaying(true);
       }
     } catch (e) {
-      playerRef.current.loadVideoById(currentSong.id);
+      playerRef.current.loadVideoById(currentTrack.id);
       playerRef.current.playVideo();
       setIsPlaying(true);
     }
@@ -202,200 +201,233 @@ export const AddaJukebox: React.FC = () => {
   return (
     <div className="w-full max-w-xl mx-auto select-none font-sans drop-shadow-2xl px-2 sm:px-0">
       
-      {/* Outer Retro Number Plate Container */}
-      <div className="bg-[#1e7a46] border-[6px] border-[#f2790f] rounded-2xl sm:rounded-3xl p-3 sm:p-4 shadow-[0_18px_40px_rgba(0,0,0,0.6)] relative">
+      {/* ======================================================== */}
+      {/* VINTAGE 90s AUDIO CASSETTE TAPE SHELL */}
+      {/* ======================================================== */}
+      <div className="relative bg-[#201d1a] border-[5px] border-[#3a3530] rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.85)] ring-2 ring-black/80">
         
-        {/* Blinking indicator lights */}
-        <div className={`hidden sm:block absolute -left-4 top-1/2 -translate-y-1/2 w-4 h-6 rounded-md border-2 border-black/40 ${isPlaying ? 'bg-[#ffc300] shadow-[0_0_12px_#ffc300] animate-pulse' : 'bg-[#6b4a00]'}`} />
-        <div className={`hidden sm:block absolute -right-4 top-1/2 -translate-y-1/2 w-4 h-6 rounded-md border-2 border-black/40 ${isPlaying ? 'bg-[#ffc300] shadow-[0_0_12px_#ffc300] animate-pulse' : 'bg-[#6b4a00]'}`} />
-
-        {/* Top Header Plate (HORN OK PLEASE / CHANDIGARH OK ADDA in Yatra One font) */}
-        <div className="flex items-center justify-between px-2 mb-2">
-          <div className="text-center flex-1">
-            <span className="font-yatra text-[#fff3dc] text-sm sm:text-lg tracking-[0.2em] uppercase drop-shadow-[2px_2px_0_rgba(0,0,0,0.4)]">
-              CHANDIGARH <span className="text-[#ffc300]">OK</span> ADDA
-            </span>
-          </div>
-
-          <button
-            onClick={() => setShowPlaylist(!showPlaylist)}
-            className="flex items-center gap-1 text-[10px] font-bold bg-[#14213d] hover:bg-[#1a2d54] text-[#ffc300] border border-[#f2790f]/60 px-2.5 py-1 rounded-full transition-colors flex-shrink-0"
-          >
-            <ListMusic className="w-3.5 h-3.5" />
-            <span>{showPlaylist ? 'Hide' : `Chandigarh Songs (${CHANDIGARH_SONGS.length})`}</span>
-          </button>
+        {/* Corner Cassette Screws (Authentic Hardware Details) */}
+        <div className="absolute top-2 left-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        </div>
+        <div className="absolute top-2 right-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        </div>
+        <div className="absolute bottom-2 left-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
+        </div>
+        <div className="absolute bottom-2 right-2.5 w-2.5 h-2.5 rounded-full bg-[#524b45] border border-black/80 flex items-center justify-center">
+          <div className="w-1.5 h-0.5 bg-[#2b2723]" />
         </div>
 
-        {/* Playlist Selector Dropdown */}
-        {showPlaylist && (
-          <div className="mb-3 bg-[#0d1627] border border-[#f2790f]/50 rounded-xl p-2 max-h-52 overflow-y-auto space-y-1 text-left animate-fade-in shadow-xl">
-            <span className="text-[10px] font-bold text-[#ffc300] uppercase tracking-wider px-2 block mb-1">
-              Select A Chandigarh Song:
-            </span>
-            {CHANDIGARH_SONGS.map((song, idx) => (
-              <button
-                key={song.id}
-                onClick={() => {
-                  goToTrack(idx);
-                  setShowPlaylist(false);
-                }}
-                className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${
-                  currentIdx === idx
-                    ? 'bg-[#ffc300] text-stone-950 font-bold'
-                    : 'text-stone-200 hover:bg-[#1e2d4a]'
-                }`}
-              >
-                <div className="truncate mr-2">
-                  <span className="block truncate font-semibold">{song.title}</span>
-                  <span className={`text-[10px] block truncate ${currentIdx === idx ? 'text-stone-900' : 'text-stone-400'}`}>
-                    {song.artist}
-                  </span>
-                </div>
-                <span className="text-[9px] uppercase px-1.5 py-0.5 rounded font-mono bg-black/40 text-stone-300">
-                  {song.tag}
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Inner Console */}
-        <div className="bg-[#14213d] rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-[#f2790f]/30 flex flex-col gap-2.5 shadow-inner">
+        {/* Paper Label (Vintage Cassette Inlay) */}
+        <div className="bg-[#f6eee3] rounded-xl p-3 sm:p-4 text-[#1a1816] shadow-inner border border-[#d6c7b2]">
           
-          {/* Main Track Row: Tiny 64x64 Screen + Meta + Play Controls (Pure truckplaylist layout) */}
-          <div className="flex items-center gap-3">
-            
-            {/* 64x64 YouTube Screen Box (Acting as moving Album Art) */}
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-black flex-shrink-0 border-2 border-[#f2790f] shadow-[0_0_0_2px_#fff3dc,0_3px_8px_rgba(0,0,0,0.5)]">
-              <div id="yt-player-embed" className="w-full h-full object-cover" />
-              {!isPlayerReady && (
-                <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
-                  <Disc3 className="w-5 h-5 text-[#ffc300] animate-spin" />
-                </div>
-              )}
+          {/* Top Brand Banner Strip */}
+          <div className="flex items-center justify-between border-b-2 border-[#d94828] pb-1.5 mb-2.5">
+            <div className="flex items-center gap-2">
+              <span className="bg-[#d94828] text-white text-[10px] font-black px-1.5 py-0.5 rounded tracking-widest font-mono">
+                {currentTrack.side}
+              </span>
+              <span className="font-yatra text-sm sm:text-base text-[#1a1816] font-bold tracking-wider">
+                CH-01 STEREO CASSETTE
+              </span>
             </div>
 
-            {/* Song Title & Artist */}
-            <div className="flex-1 min-w-0 text-left">
-              <h4 className="text-sm sm:text-base font-bold text-[#fff3dc] truncate leading-tight">
-                {currentSong.title}
-              </h4>
-              <p className="text-xs text-stone-300 truncate mt-0.5">
-                {currentSong.artist}
+            <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-[#786b59]">
+              <span>DOLBY B-NR</span>
+              <span className="hidden sm:inline">• 60 MIN</span>
+            </div>
+          </div>
+
+          {/* Lined Notepaper Area with Handwritten Track Name */}
+          <div className="bg-white/80 border border-[#e2d5c3] rounded-lg p-2.5 mb-3 flex items-center justify-between shadow-xs">
+            <div className="truncate mr-2 text-left">
+              <span className="text-[10px] font-mono font-bold text-[#d94828] uppercase tracking-wider block">
+                NOW PLAYING • {currentTrack.tag}
+              </span>
+              <h3 className="font-bold text-sm sm:text-base text-[#111] truncate tracking-tight">
+                {currentTrack.title}
+              </h3>
+              <p className="text-[11px] text-[#635746] truncate">
+                {currentTrack.artist}
               </p>
             </div>
 
-            {/* Controls (Prev, Big Yellow Play/Pause, Next) */}
-            <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Flip Tape Button */}
+            <button
+              onClick={() => goToTrack(currentIdx === 0 ? 1 : 0)}
+              className="px-2.5 py-1 bg-[#1a1816] hover:bg-[#d94828] text-[#f6eee3] text-[10px] font-mono font-bold rounded-md transition-colors flex-shrink-0 flex items-center gap-1 shadow-sm"
+              title="Flip to other side"
+            >
+              <Repeat className="w-3 h-3" />
+              <span>Flip to {currentIdx === 0 ? 'Side B' : 'Side A'}</span>
+            </button>
+          </div>
+
+          {/* ======================================================== */}
+          {/* CASSETTE TRANSPARENT WINDOW WITH SPINNING REELS & TAPE */}
+          {/* ======================================================== */}
+          <div className="relative bg-[#1a1816] border-2 border-[#473e35] rounded-xl p-3 sm:p-4 overflow-hidden shadow-inner flex items-center justify-around">
+            
+            {/* Magnetic Tape Ribbon connecting the two wheels */}
+            <div className="absolute top-1/2 left-12 right-12 h-3 bg-[#331c14] -translate-y-1/2 z-0 border-y border-[#1f100a]" />
+
+            {/* Left Cogged Spool (Spins when playing) */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div 
+                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4ebd9] border-4 border-[#331c14] flex items-center justify-center shadow-md transition-transform ${
+                  isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''
+                }`}
+              >
+                {/* Center cog teeth */}
+                <div className="w-6 h-6 rounded-full bg-[#1a1816] border-2 border-[#7a6f62] flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 bg-[#f4ebd9] rounded-sm" />
+                </div>
+              </div>
+            </div>
+
+            {/* Center Time Counter & Hidden Tiny YouTube Screen */}
+            <div className="relative z-10 flex flex-col items-center text-center px-2">
               
-              {/* Prev */}
-              <button
-                onClick={() => goToTrack(currentIdx - 1)}
-                className="w-9 h-9 rounded-full bg-[#fff3dc] text-stone-900 hover:bg-white flex items-center justify-center shadow-[0_3px_0_rgba(0,0,0,0.4)] active:translate-y-0.5 transition-all"
-                title="Previous track"
-              >
-                <SkipBack className="w-4 h-4 fill-current" />
-              </button>
+              {/* Tape Level Meter Ruler Lines */}
+              <div className="flex gap-1 mb-1 opacity-70">
+                <div className="w-0.5 h-3 bg-[#f6eee3]" />
+                <div className="w-0.5 h-2 bg-[#f6eee3]" />
+                <div className="w-0.5 h-2 bg-[#f6eee3]" />
+                <div className="w-0.5 h-4 bg-[#d94828]" />
+                <div className="w-0.5 h-2 bg-[#f6eee3]" />
+                <div className="w-0.5 h-2 bg-[#f6eee3]" />
+                <div className="w-0.5 h-3 bg-[#f6eee3]" />
+              </div>
 
-              {/* Big Yellow Play/Pause Button */}
-              <button
-                onClick={togglePlay}
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ffc300] hover:bg-[#ffb700] text-stone-950 flex items-center justify-center font-black shadow-[0_4px_0_rgba(0,0,0,0.5)] active:translate-y-0.5 transition-all"
-                title={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? (
-                  <Pause className="w-6 h-6 fill-current text-stone-950" />
-                ) : (
-                  <Play className="w-6 h-6 fill-current text-stone-950 ml-0.5" />
-                )}
-              </button>
+              {/* Time display */}
+              <div className="font-mono text-xs font-bold text-[#fde047] tracking-widest bg-black/60 px-2.5 py-0.5 rounded border border-[#524b45]">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </div>
 
-              {/* Next */}
-              <button
-                onClick={() => goToTrack(currentIdx + 1)}
-                className="w-9 h-9 rounded-full bg-[#fff3dc] text-stone-900 hover:bg-white flex items-center justify-center shadow-[0_3px_0_rgba(0,0,0,0.4)] active:translate-y-0.5 transition-all"
-                title="Next track"
-              >
-                <SkipForward className="w-4 h-4 fill-current" />
-              </button>
+              {/* Hidden 1px YouTube Screen Driving Real Master Audio */}
+              <div className="w-1 h-1 overflow-hidden opacity-0 pointer-events-none">
+                <div id="yt-cassette-audio" />
+              </div>
+            </div>
 
+            {/* Right Cogged Spool (Spins when playing) */}
+            <div className="relative z-10 flex flex-col items-center">
+              <div 
+                className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#f4ebd9] border-4 border-[#331c14] flex items-center justify-center shadow-md transition-transform ${
+                  isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''
+                }`}
+              >
+                {/* Center cog teeth */}
+                <div className="w-6 h-6 rounded-full bg-[#1a1816] border-2 border-[#7a6f62] flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 bg-[#f4ebd9] rounded-sm" />
+                </div>
+              </div>
             </div>
 
           </div>
 
-          {/* Time Scrubber */}
-          <div className="space-y-1">
+          {/* Scrubber Ribbon Slider */}
+          <div className="mt-3">
             <input
               type="range"
               min="0"
               max={duration || 100}
               value={currentTime}
               onChange={handleSeek}
-              className="w-full h-1.5 bg-black/40 accent-[#ffc300] rounded-lg cursor-pointer"
+              className="w-full h-1.5 bg-[#d6c7b2] accent-[#d94828] rounded-lg cursor-pointer"
             />
-            <div className="flex justify-between items-center text-[10px] text-stone-400 font-mono">
-              <span>{formatTime(currentTime)}</span>
-              <span className="text-[11px] text-[#ffc300] font-sans italic truncate px-2 font-medium">
-                {currentSong.famousLyric}
-              </span>
-              <span>{formatTime(duration)}</span>
+            <div className="flex justify-between items-center text-[11px] text-[#524534] font-medium italic pt-1">
+              <span className="truncate">{currentTrack.famousLyric}</span>
             </div>
           </div>
 
-          {/* Bottom Bar: Quick Pills & Mute */}
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-white/10 text-xs">
-            
-            {/* Quick Song Selector Pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              {CHANDIGARH_SONGS.map((s, idx) => (
-                <button
-                  key={s.id}
-                  onClick={() => goToTrack(idx)}
-                  className={`px-2.5 py-1 rounded-md text-[10px] font-bold whitespace-nowrap transition-all ${
-                    currentIdx === idx
-                      ? 'bg-[#ffc300] text-stone-950 shadow-md font-black'
-                      : 'bg-black/30 text-stone-300 hover:bg-black/50'
-                  }`}
-                >
-                  {s.title.split(' (')[0]}
-                </button>
-              ))}
-            </div>
+        </div>
 
-            {/* Mute toggle */}
-            <div className="flex items-center gap-2 ml-auto">
-              <button 
-                onClick={toggleMute} 
-                className="text-stone-300 hover:text-[#ffc300] p-1 transition-colors"
-                title={isMuted ? "Unmute" : "Mute"}
+        {/* ======================================================== */}
+        {/* RETRO MECHANICAL CASSETTE DECK BUTTONS */}
+        {/* ======================================================== */}
+        <div className="mt-3 pt-2 flex items-center justify-between gap-2 px-1 sm:px-2">
+          
+          {/* Side Selector Pills */}
+          <div className="flex items-center gap-1.5">
+            {CHANDIGARH_CASSETTE_TRACKS.map((t, idx) => (
+              <button
+                key={t.id}
+                onClick={() => goToTrack(idx)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all shadow-sm ${
+                  currentIdx === idx
+                    ? 'bg-[#fde047] text-[#1a1816] border-2 border-black/60 shadow-md font-black scale-105'
+                    : 'bg-[#2b2723] text-[#d6c7b2] hover:bg-[#38332e] border border-black/40'
+                }`}
               >
-                {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4" />}
+                {t.side}
               </button>
+            ))}
+          </div>
 
-              <a
-                href={`https://music.youtube.com/search?q=${encodeURIComponent(currentSong.title + ' ' + currentSong.artist)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] font-bold text-[#ffc300] hover:text-white flex items-center gap-1 bg-black/40 px-2 py-0.5 rounded border border-[#f2790f]/40"
-                title="Listen on YT Music"
-              >
-                <span>YT Music</span>
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-            </div>
+          {/* Mechanical Transport Controls (Rewind, Play, Forward) */}
+          <div className="flex items-center gap-2">
+            
+            {/* Rewind */}
+            <button
+              onClick={() => goToTrack(0)}
+              className="w-9 h-9 rounded-lg bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center border-t border-[#4f4841] border-b-2 border-black active:translate-y-0.5 shadow-md transition-all"
+              title="Side A"
+            >
+              <SkipBack className="w-4 h-4 fill-current" />
+            </button>
 
+            {/* Play / Pause Tactile Button */}
+            <button
+              onClick={togglePlay}
+              className={`w-12 h-12 rounded-xl flex items-center justify-center font-black transition-all active:translate-y-1 shadow-lg ${
+                isPlaying
+                  ? 'bg-[#d94828] text-white border-t border-[#f06e51] border-b-4 border-[#85230d]'
+                  : 'bg-[#fde047] hover:bg-[#facc15] text-[#1a1816] border-t border-[#fff] border-b-4 border-[#ab8a0d]'
+              }`}
+              title={isPlaying ? "Stop Tape" : "Play Tape"}
+            >
+              {isPlaying ? (
+                <Pause className="w-6 h-6 fill-current" />
+              ) : (
+                <Play className="w-6 h-6 fill-current ml-0.5" />
+              )}
+            </button>
+
+            {/* Fast Forward */}
+            <button
+              onClick={() => goToTrack(1)}
+              className="w-9 h-9 rounded-lg bg-[#2b2723] hover:bg-[#38332e] text-[#f6eee3] flex items-center justify-center border-t border-[#4f4841] border-b-2 border-black active:translate-y-0.5 shadow-md transition-all"
+              title="Side B"
+            >
+              <SkipForward className="w-4 h-4 fill-current" />
+            </button>
+
+          </div>
+
+          {/* Mute Toggle */}
+          <div className="flex items-center gap-1 text-[#f6eee3]">
+            <button 
+              onClick={toggleMute}
+              className="p-1.5 rounded-lg bg-[#2b2723] hover:bg-[#38332e] border border-black/40 text-[#fde047] transition-colors"
+              title={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4" />}
+            </button>
           </div>
 
         </div>
 
       </div>
 
-      {/* Hanging Mudflaps (Exact font and style of truckplaylist) */}
+      {/* Hanging Mudflaps below cassette deck */}
       <div className="flex justify-between px-6 sm:px-12 -mt-1 pointer-events-none">
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[11px] sm:text-xs px-3 py-1.5 rounded-b-lg shadow-xl tracking-wider">
+        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[10px] sm:text-[11px] px-3 py-1 rounded-b-lg shadow-xl tracking-wider">
           ਬੁਰੀ ਨਜ਼ਰ / बुरी नज़र
         </div>
-        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[11px] sm:text-xs px-3 py-1.5 rounded-b-lg shadow-xl tracking-wider text-center">
+        <div className="bg-[#111] border border-stone-800 text-[#fff3dc] font-yatra text-[10px] sm:text-[11px] px-3 py-1 rounded-b-lg shadow-xl tracking-wider">
           ਵਾਲੇ ਤੇਰਾ ਮੂੰਹ ਕਾਲਾ 🌸
         </div>
       </div>
