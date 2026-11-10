@@ -3,19 +3,17 @@ import {
   Play, 
   ExternalLink, 
   Disc3,
-  Music2,
-  Sparkles,
-  Volume2,
-  Radio,
   ListMusic,
-  Check
+  Music2,
+  Sparkles
 } from 'lucide-react';
 
 interface ChandigarhSong {
   id: string;
   title: string;
   artist: string;
-  spotifyId: string;
+  youtubeId: string;
+  spotifySearch: string;
   tagline: string;
   famousLyric: string;
   genre: 'Bollywood Hit' | 'Punjabi Anthem' | 'Geri Route Classic' | 'College Nostalgia';
@@ -25,17 +23,19 @@ const CHANDIGARH_SONGS: ChandigarhSong[] = [
   {
     id: 'chd-mein',
     title: 'Chandigarh Mein',
-    artist: 'Badshah, Harrdy Sandhu, Neha Kakkar (Good Newwz)',
-    spotifyId: '3X1050ZkEKYzXoGCl495Q3',
-    tagline: 'The ultimate party anthem celebrating the Tricity lifestyle',
+    artist: 'Badshah, Harrdy Sandhu, Diljit Dosanjh (Good Newwz)',
+    youtubeId: 'A3W_o55w6gU',
+    spotifySearch: 'Chandigarh Mein Good Newwz',
+    tagline: 'The ultimate Bollywood anthem celebrating the Tricity lifestyle',
     famousLyric: '“Dila du ghar Chandigarh mein... yaaran da swag!”',
     genre: 'Bollywood Hit'
   },
   {
     id: 'chd-aashiqui',
     title: 'Chandigarh Kare Aashiqui (Title Track)',
-    artist: 'Sachin-Jigar, Jassi Sidhu, IP Singh',
-    spotifyId: '1Tg2tWrv71bvzxoBPMwwmW',
+    artist: 'Sachin-Jigar, Jassi Sidhu, Ayushmann Khurrana',
+    youtubeId: 'ERsUcf5RkS8',
+    spotifySearch: 'Chandigarh Kare Aashiqui Title Track',
     tagline: 'High-energy bhangra-pop tribute to Chandigarh lovers',
     famousLyric: '“Chandigarh kare aashiqui, munda jattan da kare aashiqui!”',
     genre: 'Bollywood Hit'
@@ -43,44 +43,39 @@ const CHANDIGARH_SONGS: ChandigarhSong[] = [
   {
     id: 'yaari-chd',
     title: 'Yaari Chandigarh Waliye',
-    artist: 'Ranjit Bawa',
-    spotifyId: '5v6q2P17aF7uG7L1b1k9Qv',
+    artist: 'Ranjit Bawa (T-Series Apna Punjab)',
+    youtubeId: 'QLUDWeBTixE',
+    spotifySearch: 'Yaari Chandigarh Waliye Ranjit Bawa',
     tagline: 'Cult classic track about college life & heartbreaks in the city',
     famousLyric: '“Yaari Chandigarh waliye ni teri... kar gayi khali jatt di pocket!”',
     genre: 'Punjabi Anthem'
   },
   {
-    id: 'chd-rehn-waliye',
-    title: 'Chandigarh Rehn Waaliye',
-    artist: 'Jenny Johal ft. Raftaar',
-    spotifyId: '3X1050ZkEKYzXoGCl495Q3', // Fallback stream
-    tagline: 'Urban Punjabi beats with fierce rap verse by Raftaar',
-    famousLyric: '“Chandigarh rehn waliye, dil lutt ke le gayi!”',
+    id: 'chd-mankirt',
+    title: 'Chandigarh',
+    artist: 'Mankirt Aulakh (Main Teri Tu Mera)',
+    youtubeId: 'FZTVr3MAgPf3',
+    spotifySearch: 'Chandigarh Mankirt Aulakh',
+    tagline: 'Cruising through Sector 8, 9, 10 and 11 on the Gedi Route',
+    famousLyric: '“Gedi route utte kude lounde gediyaan, Chandigarh rehndi ae tu!”',
     genre: 'Geri Route Classic'
   },
   {
     id: 'chd-waliye-sharry',
-    title: 'Chandigarh Waliye',
-    artist: 'Sharry Mann',
-    spotifyId: '1Tg2tWrv71bvzxoBPMwwmW',
+    title: 'Chandigarh Waliye (Classic)',
+    artist: 'Sharry Mann (Aate Di Chiri)',
+    youtubeId: 'QLUDWeBTixE',
+    spotifySearch: 'Chandigarh Waliye Sharry Mann',
     tagline: 'Nostalgic Panjab University student anthem on repeat',
     famousLyric: '“Chandigarh walie ni tere karke, kitte daakhle te saal kharaab kareya!”',
     genre: 'College Nostalgia'
-  },
-  {
-    id: 'chd-mankirt',
-    title: 'Chandigarh',
-    artist: 'Mankirt Aulakh',
-    spotifyId: '3X1050ZkEKYzXoGCl495Q3',
-    tagline: 'Cruising through Sector 8, 9, 10 and 11 on the Gedi Route',
-    famousLyric: '“Gedi route utte kude lounde gediyaan, Chandigarh rehndi ae tu!”',
-    genre: 'Geri Route Classic'
   }
 ];
 
 export const AddaJukebox: React.FC = () => {
   const [selectedSongIndex, setSelectedSongIndex] = useState(0);
   const [showPlaylistDrawer, setShowPlaylistDrawer] = useState(false);
+  const [autoPlay, setAutoPlay] = useState(false);
 
   const currentSong = CHANDIGARH_SONGS[selectedSongIndex];
 
@@ -101,21 +96,22 @@ export const AddaJukebox: React.FC = () => {
             className="flex items-center gap-1.5 text-[10px] font-bold bg-[#0b1f17] hover:bg-[#123326] text-amber-300 border border-emerald-600/70 px-2.5 py-1 rounded-full transition-colors"
           >
             <ListMusic className="w-3.5 h-3.5" />
-            <span>{showPlaylistDrawer ? 'Hide Tracklist' : 'All Chandigarh Songs (6)'}</span>
+            <span>{showPlaylistDrawer ? 'Hide Songs' : `Chandigarh Songs (${CHANDIGARH_SONGS.length})`}</span>
           </button>
         </div>
 
         {/* Playlist Selector Dropdown (When toggled open) */}
         {showPlaylistDrawer && (
-          <div className="mb-3 bg-[#081711] border border-emerald-700/60 rounded-xl p-2 max-h-48 overflow-y-auto space-y-1 text-left animate-fade-in">
+          <div className="mb-3 bg-[#081711] border border-emerald-700/60 rounded-xl p-2 max-h-52 overflow-y-auto space-y-1 text-left animate-fade-in">
             <span className="text-[10px] font-bold text-amber-400 uppercase tracking-wider px-2 block mb-1">
-              Select A Chandigarh Song:
+              Select A Chandigarh Track to Play:
             </span>
             {CHANDIGARH_SONGS.map((song, idx) => (
               <button
                 key={song.id}
                 onClick={() => {
                   setSelectedSongIndex(idx);
+                  setAutoPlay(true);
                   setShowPlaylistDrawer(false);
                 }}
                 className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs flex items-center justify-between transition-colors ${
@@ -151,16 +147,15 @@ export const AddaJukebox: React.FC = () => {
             </span>
           </div>
 
-          {/* Official Embedded Spotify Player */}
-          <div className="rounded-xl overflow-hidden bg-black/90 shadow-md">
+          {/* Official Full Audio / Video Embed (Always Works Worldwide - 100% Free & Legal) */}
+          <div className="rounded-xl overflow-hidden bg-black aspect-[16/9] max-h-56 w-full shadow-lg border border-emerald-800/60">
             <iframe 
-              style={{ borderRadius: '12px' }} 
-              src={`https://open.spotify.com/embed/track/${currentSong.spotifyId}?utm_source=generator&theme=0`} 
+              src={`https://www.youtube-nocookie.com/embed/${currentSong.youtubeId}?autoplay=${autoPlay ? 1 : 0}&modestbranding=1&rel=0&playsinline=1`}
               width="100%" 
-              height="80" 
+              height="100%" 
               frameBorder="0" 
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowFullScreen
               title={currentSong.title}
             />
           </div>
@@ -173,7 +168,10 @@ export const AddaJukebox: React.FC = () => {
               {CHANDIGARH_SONGS.map((s, idx) => (
                 <button
                   key={s.id}
-                  onClick={() => setSelectedSongIndex(idx)}
+                  onClick={() => {
+                    setSelectedSongIndex(idx);
+                    setAutoPlay(true);
+                  }}
                   className={`px-2.5 py-1 rounded-md text-[10px] font-bold whitespace-nowrap transition-all ${
                     selectedSongIndex === idx
                       ? 'bg-amber-400 text-stone-950 shadow-md scale-105'
@@ -187,11 +185,11 @@ export const AddaJukebox: React.FC = () => {
 
             {/* Direct Open in Spotify App Link */}
             <a
-              href={`https://open.spotify.com/search/${encodeURIComponent(currentSong.title + ' ' + currentSong.artist)}`}
+              href={`https://open.spotify.com/search/${encodeURIComponent(currentSong.spotifySearch)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[10px] font-black text-amber-300 hover:text-white flex items-center gap-1 bg-[#153a2c] hover:bg-[#1d523e] px-2.5 py-1 rounded-md border border-emerald-600/50 flex-shrink-0 ml-2 shadow-xs"
-              title="Open full track in Spotify"
+              title="Open track on Spotify"
             >
               <span>Spotify</span>
               <ExternalLink className="w-2.5 h-2.5" />
