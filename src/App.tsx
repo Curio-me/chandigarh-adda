@@ -8,19 +8,7 @@ import { BookmarksDrawer } from './components/BookmarksDrawer';
 import { InstagramIcon, TwitterIcon } from './components/SocialIcons';
 import { allItems } from './data/mockData';
 import { ItemData, CategoryType } from './types';
-import { 
-  Sparkles, 
-  Ticket, 
-  UtensilsCrossed, 
-  Landmark, 
-  Mountain, 
-  Briefcase, 
-  Newspaper,
-  Bookmark,
-  Compass,
-  PlusCircle,
-  Clock
-} from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
@@ -120,39 +108,13 @@ export const App: React.FC = () => {
             <TwitterIcon className="w-4 h-4" />
           </a>
 
-          {/* Saved Wishlist */}
-          <button
-            onClick={() => setIsSavedDrawerOpen(true)}
-            className="relative p-2 bg-black/40 hover:bg-stone-800 border border-white/10 rounded-full text-stone-200 transition-colors shadow-md"
-            title="Saved places"
-          >
-            <Bookmark className="w-4 h-4" />
-            {savedIds.length > 0 && (
-              <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-black">
-                {savedIds.length}
-              </span>
-            )}
-          </button>
-
-          {/* Feature Your Business */}
+          {/* Feature Your Brand */}
           <button
             onClick={() => setIsSubmitOpen(true)}
-            className="hidden lg:flex items-center gap-1.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg shadow-orange-600/30 transition-transform hover:scale-105"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-lg shadow-orange-600/30 transition-transform hover:scale-105"
           >
             <PlusCircle className="w-3.5 h-3.5" />
             <span>Feature Your Brand</span>
-          </button>
-
-          {/* Explore Full Guides */}
-          <button
-            onClick={() => {
-              setActiveCategory('all');
-              setIsDirectoryOpen(true);
-            }}
-            className="flex items-center gap-1.5 bg-[#f9a646] hover:bg-[#ffb703] text-stone-950 text-xs font-black px-4 py-1.5 rounded-full shadow-lg shadow-amber-500/20 transition-transform hover:scale-105"
-          >
-            <Compass className="w-3.5 h-3.5" />
-            <span>Explore City Guide</span>
           </button>
         </div>
 
