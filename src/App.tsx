@@ -161,22 +161,19 @@ export const App: React.FC = () => {
       {/* 3. Centerpiece: Stylized Retro Truck-Art Typography & Jukebox Player */}
       <main className="relative z-20 flex-1 flex flex-col items-center justify-center text-center px-4 py-4 sm:py-8 my-auto">
         
-        {/* Giant Retro Shadowed Heading (Inspired by Horn Ok Please on truckplaylist.wtf) */}
-        <div className="max-w-4xl mx-auto space-y-2 mb-4 sm:mb-6">
+        {/* Giant Retro Shadowed Heading (Exact typography from truckplaylist.wtf) */}
+        <div className="max-w-4xl mx-auto space-y-1 sm:space-y-2 mb-4 sm:mb-6">
           
-          {/* Authentic Bilingual Gurmukhi & Devanagari Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-wide text-white drop-shadow-[0_8px_16px_rgba(0,0,0,0.9)] select-none">
-            <span className="text-[#fff4cc] inline-block filter drop-shadow-[0_6px_0_#9a3412]">
-              ਚੰਡੀਗੜ੍ਹ ਅੱਡਾ
-            </span>
+          <h1 className="font-yatra text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#fff3dc] drop-shadow-[4px_4px_0_#d62828] filter drop-shadow-[8px_8px_0_rgba(0,0,0,0.55)] leading-none select-none">
+            ਚੰਡੀਗੜ੍ਹ ਅੱਡਾ
           </h1>
 
-          <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#ffd460] tracking-wider uppercase drop-shadow-[0_3px_6px_rgba(0,0,0,0.9)]">
+          <div className="font-yatra text-lg sm:text-2xl md:text-3xl text-[#ffc300] tracking-wider uppercase drop-shadow-[2px_2px_0_rgba(0,0,0,0.6)] pt-1">
             चंडीगढ़ अड्डा • CHANDIGARH ADDA
           </div>
 
           {/* Poetic Subtitle */}
-          <p className="text-xs sm:text-sm md:text-base text-stone-200 max-w-xl mx-auto font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] leading-relaxed pt-1">
+          <p className="font-mukta text-xs sm:text-base md:text-lg text-[#ffc300] max-w-xl mx-auto font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] leading-relaxed pt-1">
             Songs that play on Gedi Route. Sukhna Lake sunset. Night highway to Kasauli. Dhaba chai. Full volume.
           </p>
 

@@ -4,8 +4,16 @@
 
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Mukta', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
+}
+
+.font-yatra {
+  font-family: 'Yatra One', cursive;
+}
+
+.font-mukta {
+  font-family: 'Mukta', sans-serif;
 }
 
 .font-serif-display {
