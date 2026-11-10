@@ -73,8 +73,30 @@ export const AddaJukebox: React.FC = () => {
       initPlayer();
     }
 
+    const handleStartGedi = () => {
+      if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      } else {
+        let attempts = 0;
+        const interval = setInterval(() => {
+          attempts++;
+          if (playerRef.current && typeof playerRef.current.playVideo === 'function') {
+            playerRef.current.playVideo();
+            setIsPlaying(true);
+            clearInterval(interval);
+          } else if (attempts > 20) {
+            clearInterval(interval);
+          }
+        }, 250);
+      }
+    };
+
+    window.addEventListener('start-gedi', handleStartGedi);
+
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      window.removeEventListener('start-gedi', handleStartGedi);
     };
   }, []);
 

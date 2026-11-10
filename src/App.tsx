@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IllustratedScene } from './components/IllustratedScene';
 import { AddaJukebox } from './components/AddaJukebox';
 import { SponsorBadge } from './components/SponsorBadge';
+import { GediEntranceOverlay } from './components/GediEntranceOverlay';
 import { DirectoryDrawer } from './components/DirectoryDrawer';
 import { DetailModal } from './components/DetailModal';
 import { SubmitModal } from './components/SubmitModal';
@@ -63,9 +64,23 @@ export const App: React.FC = () => {
 
   const savedItems = allItems.filter(item => savedIds.includes(item.id));
 
+  const handleStartGedi = () => {
+    window.dispatchEvent(new CustomEvent('start-gedi'));
+  };
+
+  const handleEnterSilent = () => {
+    // Dismisses entrance without playing audio
+  };
+
   return (
     <div className="relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden select-none bg-stone-950 font-sans text-white">
       
+      {/* 0. "Start the Gedi" One-Click Autoplay Entrance Screen */}
+      <GediEntranceOverlay 
+        onStartGedi={handleStartGedi} 
+        onEnterSilent={handleEnterSilent} 
+      />
+
       {/* 1. Rich Illustrated Painterly Sunset Background */}
       <IllustratedScene onOpenPartnerModal={() => setIsSubmitOpen(true)} />
 
