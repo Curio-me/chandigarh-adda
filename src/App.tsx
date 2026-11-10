@@ -12,6 +12,7 @@ import { SubmitModal } from './components/SubmitModal';
 import { BookmarksDrawer } from './components/BookmarksDrawer';
 import { NewsletterBanner } from './components/NewsletterBanner';
 import { Footer } from './components/Footer';
+import { AddaJukebox } from './components/AddaJukebox';
 import { allItems } from './data/mockData';
 import { CategoryType, TricityZone, ItemData } from './types';
 import { 
@@ -419,6 +420,9 @@ export const App: React.FC = () => {
         onSelectItem={setSelectedItem}
         onClearAll={clearAllSaved}
       />
+
+      {/* Floating Retro Tricity Radio / Adda Jukebox */}
+      <AddaJukebox />
 
     </div>
   );

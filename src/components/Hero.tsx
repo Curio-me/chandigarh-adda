@@ -31,12 +31,14 @@ export const Hero: React.FC<HeroProps> = ({
 
       <div className="max-w-5xl mx-auto text-center relative z-10">
         
-        {/* Tricity Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-800/80 border border-stone-700 text-stone-200 text-xs font-semibold mb-6 shadow-inner">
+        {/* Tricity Cultural Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/90 border border-stone-700/80 text-stone-200 text-xs font-semibold mb-6 shadow-inner">
           <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping" />
-          <span>Chandigarh • Mohali • Panchkula</span>
-          <span className="text-stone-400">|</span>
-          <span className="text-orange-400">The City Beautiful Guide</span>
+          <span className="tracking-wide font-medium">ਚੰਡੀਗੜ੍ਹ • ਮੋਹਾਲੀ • ਪੰਚਕੂਲਾ</span>
+          <span className="text-stone-500">|</span>
+          <span className="text-amber-400 font-bold">The City Beautiful</span>
+          <span className="hidden sm:inline text-stone-500">|</span>
+          <span className="hidden sm:inline text-emerald-400 font-medium">📻 CH-01 Jukebox Live</span>
         </div>
 
         {/* Main Headline */}
