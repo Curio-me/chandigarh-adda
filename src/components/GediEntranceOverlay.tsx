@@ -4,11 +4,17 @@ import { Volume2, VolumeX, Sparkles, Key } from 'lucide-react';
 interface GediEntranceOverlayProps {
   onStartGedi: () => void;
   onEnterSilent: () => void;
+  temp?: number;
+  aqi?: number;
+  aqiLabel?: string;
 }
 
 export const GediEntranceOverlay: React.FC<GediEntranceOverlayProps> = ({
   onStartGedi,
   onEnterSilent,
+  temp = 22,
+  aqi = 120,
+  aqiLabel = 'MODERATE',
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isFading, setIsFading] = useState(false);
@@ -62,7 +68,7 @@ export const GediEntranceOverlay: React.FC<GediEntranceOverlayProps> = ({
           <span>CH-01 • GEDISTREAM 93.5 FM</span>
         </div>
         <div className="hidden sm:block text-amber-400/80">
-          SUKHNA LAKE SUNSET • 24°C • AQI 118 (MODERATE)
+          SUKHNA LAKE • {temp}°C • AQI {aqi} ({aqiLabel})
         </div>
       </div>
 

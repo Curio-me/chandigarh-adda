@@ -12,6 +12,7 @@ import { InstagramIcon, TwitterIcon } from './components/SocialIcons';
 import { allItems } from './data/mockData';
 import { ItemData, CategoryType } from './types';
 import { PlusCircle } from 'lucide-react';
+import { useChandigarhWeather } from './hooks/useChandigarhWeather';
 
 export const App: React.FC = () => {
   const [isDirectoryOpen, setIsDirectoryOpen] = useState(false);
@@ -63,6 +64,9 @@ export const App: React.FC = () => {
     setIsDirectoryOpen(true);
   };
 
+  // Live weather & real-time AQI monitor
+  const { temp, aqi, aqiLabel, aqiColor } = useChandigarhWeather();
+
   const savedItems = allItems.filter(item => savedIds.includes(item.id));
 
   const handleStartGedi = () => {
@@ -78,6 +82,9 @@ export const App: React.FC = () => {
       
       {/* 0. "Start the Gedi" One-Click Autoplay Entrance Screen */}
       <GediEntranceOverlay 
+        temp={temp}
+        aqi={aqi}
+        aqiLabel={aqiLabel}
         onStartGedi={handleStartGedi} 
         onEnterSilent={handleEnterSilent} 
       />
@@ -93,16 +100,16 @@ export const App: React.FC = () => {
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" />
           <span className="font-mono font-bold text-amber-300">{timeStr || '5:31 PM'}</span>
           <span className="text-stone-500">•</span>
-          <span className="text-stone-300 font-mono text-[11px] hidden sm:inline">24°C SUKHNA</span>
+          <span className="text-stone-300 font-mono text-[11px] hidden sm:inline">{temp}°C SUKHNA</span>
           <span className="hidden sm:inline text-stone-500">•</span>
           
-          {/* AQI Pill */}
+          {/* Live AQI Pill */}
           <div className="flex items-center gap-1 font-mono text-[11px]">
             <span className="text-stone-400 font-bold">AQI</span>
-            <span className="font-bold text-amber-300 bg-amber-400/15 px-1.5 py-0.5 rounded border border-amber-400/30">
-              118
+            <span className={`font-bold px-1.5 py-0.5 rounded border ${aqiColor}`}>
+              {aqi}
             </span>
-            <span className="text-amber-400/80 text-[10px] hidden md:inline font-medium">MODERATE</span>
+            <span className="text-stone-400 text-[10px] hidden md:inline font-medium">{aqiLabel}</span>
           </div>
 
           <span className="hidden lg:inline text-stone-500">•</span>
@@ -176,7 +183,7 @@ export const App: React.FC = () => {
         {/* The Retro CH-01 Adda Jukebox Audio Player */}
         <div className="w-full">
           <AddaJukebox />
-          <CityTelemetryTicker />
+          <CityTelemetryTicker temp={temp} aqi={aqi} aqiLabel={aqiLabel} />
           <SponsorBadge onOpenPartnerModal={() => setIsSubmitOpen(true)} />
         </div>
 

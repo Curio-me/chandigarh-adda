@@ -1,50 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, Navigation, Compass } from 'lucide-react';
+import { Radio } from 'lucide-react';
 
-const TRICITY_TELEMETRY = [
-  {
-    tag: 'GEDI ROUTE',
-    status: 'SECTOR 8 · 9 · 10 · 11',
-    info: 'CRUISING ACTIVE • BASS FULL VOLUME',
-    color: 'text-amber-400',
-  },
-  {
-    tag: 'SUKHNA LAKE',
-    status: 'PROMENADE & GOLF COURSE',
-    info: '24°C COOL BREEZE • GOLDEN HOUR CHAI',
-    color: 'text-emerald-400',
-  },
-  {
-    tag: 'NH-5 EXPRESSWAY',
-    status: 'KALKA - KASAULI HIGHWAY',
-    info: 'CLEAR ROADS • SHIVALIK MIST ROLLING IN',
-    color: 'text-sky-400',
-  },
-  {
-    tag: 'CITY AQI',
-    status: 'SECTOR 22 CAAQMS MONITOR',
-    info: 'AQI 118 (MODERATE) • SHIVALIK AIRFLOW',
-    color: 'text-amber-400',
-  },
-  {
-    tag: 'NIGHT ADDA',
-    status: 'SECTOR 35 & 26 PLAZA',
-    info: 'DHABA CHAI • FOOD & NIGHTLIFE OPEN',
-    color: 'text-orange-400',
-  },
-];
+interface CityTelemetryTickerProps {
+  temp?: number;
+  aqi?: number;
+  aqiLabel?: string;
+}
 
-export const CityTelemetryTicker: React.FC = () => {
+export const CityTelemetryTicker: React.FC<CityTelemetryTickerProps> = ({
+  temp = 22,
+  aqi = 120,
+  aqiLabel = 'MODERATE',
+}) => {
   const [index, setIndex] = useState(0);
+
+  const telemetryItems = [
+    {
+      tag: 'CITY AQI',
+      status: 'SECTOR 22 CAAQMS STATION',
+      info: `AQI ${aqi} (${aqiLabel}) • LIVE MONITOR`,
+      color: aqi <= 100 ? 'text-emerald-400' : aqi <= 150 ? 'text-amber-400' : 'text-orange-400',
+    },
+    {
+      tag: 'SUKHNA LAKE',
+      status: 'PROMENADE & GOLF COURSE',
+      info: `${temp}°C FRESH BREEZE • SUNSET CHAI`,
+      color: 'text-emerald-400',
+    },
+    {
+      tag: 'GEDI ROUTE',
+      status: 'SECTOR 8 · 9 · 10 · 11',
+      info: 'CRUISING ACTIVE • BASS FULL VOLUME',
+      color: 'text-amber-400',
+    },
+    {
+      tag: 'NH-5 EXPRESSWAY',
+      status: 'KALKA - KASAULI HIGHWAY',
+      info: 'CLEAR ROADS • SHIVALIK MIST ROLLING IN',
+      color: 'text-sky-400',
+    },
+    {
+      tag: 'NIGHT ADDA',
+      status: 'SECTOR 35 & 26 PLAZA',
+      info: 'DHABA CHAI • FOOD & NIGHTLIFE OPEN',
+      color: 'text-orange-400',
+    },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % TRICITY_TELEMETRY.length);
+      setIndex((prev) => (prev + 1) % telemetryItems.length);
     }, 4500);
     return () => clearInterval(timer);
-  }, []);
+  }, [telemetryItems.length]);
 
-  const current = TRICITY_TELEMETRY[index];
+  const current = telemetryItems[index];
 
   return (
     <div className="mt-2.5 mx-auto max-w-md px-3 animate-in fade-in duration-300">
