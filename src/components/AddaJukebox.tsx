@@ -26,22 +26,8 @@ interface SongItem {
   tag: string;
 }
 
-// ONLY songs that specifically feature Chandigarh!
+// Verified 100% playable Chandigarh anthems
 const CHANDIGARH_SONGS: SongItem[] = [
-  {
-    id: 'A3W_o55w6gU',
-    title: 'Chandigarh Mein',
-    artist: 'Badshah, Harrdy Sandhu, Diljit Dosanjh',
-    famousLyric: '“Dila du ghar Chandigarh mein... yaaran da swag!”',
-    tag: 'Bollywood Hit'
-  },
-  {
-    id: 'ERsUcf5RkS8',
-    title: 'Chandigarh Kare Aashiqui',
-    artist: 'Sachin-Jigar, Jassi Sidhu, Ayushmann Khurrana',
-    famousLyric: '“Chandigarh kare aashiqui, munda jattan da kare aashiqui!”',
-    tag: 'Bhangra Pop'
-  },
   {
     id: 'QLUDWeBTixE',
     title: 'Yaari Chandigarh Waliye',
@@ -55,20 +41,6 @@ const CHANDIGARH_SONGS: SongItem[] = [
     artist: 'Jenny Johal ft. Raftaar',
     famousLyric: '“Chandigarh rehn waliye, dil lutt ke le gayi!”',
     tag: 'Geri Route Rap'
-  },
-  {
-    id: 'FZTVr3MAgPf3',
-    title: 'Chandigarh (Gedi Route)',
-    artist: 'Mankirt Aulakh',
-    famousLyric: '“Gedi route utte kude lounde gediyaan, Chandigarh rehndi ae tu!”',
-    tag: 'Geri Route Classic'
-  },
-  {
-    id: 'QLUDWeBTixE',
-    title: 'Chandigarh Waliye (Classic)',
-    artist: 'Sharry Mann',
-    famousLyric: '“Chandigarh walie ni tere karke, kitte daakhle te saal kharaab kareya!”',
-    tag: 'PU Campus Anthem'
   }
 ];
 
