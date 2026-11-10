@@ -253,8 +253,12 @@ export const AddaJukebox: React.FC = () => {
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-[9px] font-mono font-bold text-[#786b59]">
+            <div className="flex items-center gap-1.5 text-[8.5px] font-mono font-bold text-[#786b59]">
+              <span className="hidden sm:inline">93.5 FM</span>
+              <span className="hidden sm:inline">•</span>
               <span>DOLBY B-NR</span>
+              <span>•</span>
+              <span className="text-[#d94828]">320K</span>
             </div>
           </div>
 

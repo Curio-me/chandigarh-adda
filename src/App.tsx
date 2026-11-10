@@ -3,6 +3,7 @@ import { IllustratedScene } from './components/IllustratedScene';
 import { AddaJukebox } from './components/AddaJukebox';
 import { SponsorBadge } from './components/SponsorBadge';
 import { GediEntranceOverlay } from './components/GediEntranceOverlay';
+import { CityTelemetryTicker } from './components/CityTelemetryTicker';
 import { DirectoryDrawer } from './components/DirectoryDrawer';
 import { DetailModal } from './components/DetailModal';
 import { SubmitModal } from './components/SubmitModal';
@@ -87,19 +88,23 @@ export const App: React.FC = () => {
       {/* 2. Top Header Bar (Clock, Social Links, Directory & Submit CTAs) */}
       <header className="relative z-30 w-full px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
         
-        {/* Left: Live Time & Sunset Status */}
-        <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium text-stone-200 shadow-md">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        {/* Left: Live Time & City Telemetry */}
+        <div className="flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-medium text-stone-200 shadow-md">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" />
           <span className="font-mono font-bold text-amber-300">{timeStr || '5:31 PM'}</span>
-          <span className="text-stone-400">•</span>
-          <span className="hidden sm:inline text-stone-300">Sukhna Lake Sunset</span>
+          <span className="text-stone-500">•</span>
+          <span className="text-stone-300 font-mono text-[11px]">24°C SUKHNA BREEZE</span>
+          <span className="hidden lg:inline text-stone-500">•</span>
+          <span className="hidden lg:inline text-amber-400/90 font-mono text-[11px]">FM 93.5 MHZ</span>
         </div>
 
-        {/* Center: Subtle City Badge */}
-        <div className="hidden md:flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest text-[#ffd460] uppercase shadow-md">
+        {/* Center: Live Sector & Route Status Badge */}
+        <div className="hidden md:flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-widest text-[#ffd460] uppercase shadow-md">
+          <span className="text-amber-400 font-bold">CH-01</span>
+          <span className="text-stone-500">•</span>
           <span>THE CITY BEAUTIFUL</span>
-          <span className="text-stone-400">•</span>
-          <span className="text-orange-400">CHANDIGARH ADDA</span>
+          <span className="text-stone-500">•</span>
+          <span className="text-orange-400 font-bold">SECTOR 1-60</span>
         </div>
 
         {/* Right: Social & Actions */}
@@ -160,6 +165,7 @@ export const App: React.FC = () => {
         {/* The Retro CH-01 Adda Jukebox Audio Player */}
         <div className="w-full">
           <AddaJukebox />
+          <CityTelemetryTicker />
           <SponsorBadge onOpenPartnerModal={() => setIsSubmitOpen(true)} />
         </div>
 
