@@ -35,3 +35,23 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a29e;
 }
+
+/* 90s Hi-Fi Cassette Audio Visualizer Equalizer Keyframes */
+@keyframes eq-bounce {
+  0% { transform: scaleY(0.12); }
+  35% { transform: scaleY(0.75); }
+  65% { transform: scaleY(1); }
+  85% { transform: scaleY(0.4); }
+  100% { transform: scaleY(0.18); }
+}
+
+.animate-eq-1 { animation: eq-bounce 0.42s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate; transform-origin: bottom; }
+.animate-eq-2 { animation: eq-bounce 0.62s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.12s; transform-origin: bottom; }
+.animate-eq-3 { animation: eq-bounce 0.51s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.24s; transform-origin: bottom; }
+.animate-eq-4 { animation: eq-bounce 0.73s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.08s; transform-origin: bottom; }
+.animate-eq-5 { animation: eq-bounce 0.48s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.31s; transform-origin: bottom; }
+.animate-eq-6 { animation: eq-bounce 0.67s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.16s; transform-origin: bottom; }
+.animate-eq-7 { animation: eq-bounce 0.54s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.27s; transform-origin: bottom; }
+.animate-eq-8 { animation: eq-bounce 0.78s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.04s; transform-origin: bottom; }
+.animate-eq-9 { animation: eq-bounce 0.58s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.2s; transform-origin: bottom; }
+.animate-eq-10 { animation: eq-bounce 0.45s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate 0.35s; transform-origin: bottom; }

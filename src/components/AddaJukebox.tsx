@@ -279,21 +279,40 @@ export const AddaJukebox: React.FC = () => {
               </div>
             </div>
 
-            {/* Center Time Counter & Hidden Tiny YouTube Screen */}
-            <div className="relative z-10 flex flex-col items-center text-center px-2">
+            {/* Center Time Counter, Frequency Equalizer & Audio Engine */}
+            <div className="relative z-10 flex flex-col items-center text-center px-2 min-w-[110px]">
               
-              {/* Tape Level Meter Ruler Lines */}
-              <div className="flex gap-1 mb-0.5 opacity-60">
-                <div className="w-0.5 h-2 bg-[#f6eee3]" />
-                <div className="w-0.5 h-1.5 bg-[#f6eee3]" />
-                <div className="w-0.5 h-2.5 bg-[#d94828]" />
-                <div className="w-0.5 h-1.5 bg-[#f6eee3]" />
-                <div className="w-0.5 h-2 bg-[#f6eee3]" />
+              {/* Dynamic Retro Audio Frequency Equalizer (VU Bands) */}
+              <div className="flex items-end justify-center gap-1 h-4 mb-1 px-2 py-0.5 rounded bg-black/75 border border-[#524b45]/70 backdrop-blur-xs">
+                {[
+                  { id: 1, anim: 'animate-eq-1', color: 'bg-emerald-400' },
+                  { id: 2, anim: 'animate-eq-2', color: 'bg-emerald-400' },
+                  { id: 3, anim: 'animate-eq-3', color: 'bg-emerald-400' },
+                  { id: 4, anim: 'animate-eq-4', color: 'bg-[#fde047]' },
+                  { id: 5, anim: 'animate-eq-5', color: 'bg-[#fde047]' },
+                  { id: 6, anim: 'animate-eq-6', color: 'bg-[#fde047]' },
+                  { id: 7, anim: 'animate-eq-7', color: 'bg-orange-400' },
+                  { id: 8, anim: 'animate-eq-8', color: 'bg-orange-400' },
+                  { id: 9, anim: 'animate-eq-9', color: 'bg-red-500' },
+                  { id: 10, anim: 'animate-eq-10', color: 'bg-red-500' },
+                ].map((bar) => (
+                  <span
+                    key={bar.id}
+                    className={`w-[2.5px] h-3.5 rounded-t-xs transition-all duration-300 ${bar.color} ${
+                      isPlaying 
+                        ? `${bar.anim} opacity-95 shadow-[0_0_4px_currentColor]` 
+                        : 'scale-y-[0.15] opacity-30 origin-bottom'
+                    }`}
+                  />
+                ))}
               </div>
 
-              {/* Time display */}
-              <div className="font-mono text-[10px] font-bold text-[#fde047] tracking-wider bg-black/70 px-2 py-0.5 rounded border border-[#524b45]">
-                {formatTime(currentTime)} / {formatTime(duration)}
+              {/* Time display with STEREO pulse pill */}
+              <div className="flex items-center gap-1 font-mono text-[9px] font-bold text-[#fde047] tracking-wider bg-black/80 px-2 py-0.5 rounded border border-[#524b45]/80 shadow-inner">
+                {isPlaying && (
+                  <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_3px_#34d399]" />
+                )}
+                <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
               </div>
 
               {/* Hidden 1px YouTube Screen Driving Real Master Audio */}
