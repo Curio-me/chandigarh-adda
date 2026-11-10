@@ -67,7 +67,7 @@ export const App: React.FC = () => {
     <div className="relative min-h-screen w-full flex flex-col justify-between overflow-x-hidden select-none bg-stone-950 font-sans text-white">
       
       {/* 1. Rich Illustrated Painterly Sunset Background */}
-      <IllustratedScene onOpenPartnerModal={() => setIsSubmitOpen(true)} />
+      <IllustratedScene />
 
       {/* 2. Top Header Bar (Clock, Social Links, Directory & Submit CTAs) */}
       <header className="relative z-30 w-full px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between">
